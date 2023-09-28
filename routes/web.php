@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ChatController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,8 @@ Route::get('/', function () {
     return view('test');
 });
 Route::post('chat', [ChatController::class, 'chat'])->name('sendMessage');
+
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/login', 'loginPage')->name('login');
+    Route::post('/createUser', 'createUser')->name('createUser');
+});

@@ -11,6 +11,10 @@ class AuthController extends Controller
 {
     public function loginPage()
     {
+        if(Auth::check()) {
+            return redirect(route('app'));
+        }
+
         return view('login');
     }
 

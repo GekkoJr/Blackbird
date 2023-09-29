@@ -2,8 +2,6 @@
 
 namespace App\Livewire\Forms;
 
-
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
@@ -25,6 +23,12 @@ class LoginForm extends Form
             'password' => $this->password,
         ];
 
-        app(AuthController::class->login($credentials));
+        if(Auth::attempt($credentials)) {
+            return redirect(route('home'));
+        } else {
+            return back()->withErrors([
+                'error' => 'Invalid credentials'
+            ]);
+        }
     }
 }

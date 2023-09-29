@@ -31,17 +31,17 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $validated = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required'
-        ]);
+//        $validated = $request->validate([
+//            'email' => 'required|email',
+//            'password' => 'required'
+//        ]);
 
-        if(Auth::attempt($validated)) {
+//        if(Auth::attempt($validated)) {
             return redirect(route('home'));
-        }
+//        }
 
-        return back()->withErrors([
-            'email' => 'your email or password is incorecct'
-        ]);
+//        return back()->withErrors([
+//            'email' => 'your email or password is incorecct'
+//        ]);
     }
 }

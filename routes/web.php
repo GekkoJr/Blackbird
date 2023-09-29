@@ -24,5 +24,6 @@ Route::post('chat', [ChatController::class, 'chat'])->name('sendMessage');
 
 Route::controller(AuthController::class)->group(function () {
     Route::post('/createUser', 'createUser')->name('createUser');
+    Route::post('/loginUser', 'loginUser')->name('loginUser');
 });
 

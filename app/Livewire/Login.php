@@ -13,6 +13,11 @@ class Login extends Component
         $this->form->login();
     }
 
+    public function switchForm()
+    {
+        dispatch('switchForm');
+    }
+
     public function render()
     {
         return <<<'HTML'

@@ -15,7 +15,11 @@ class LoginAndSignup extends Component
     #[On('switchForm')]
     public function switchForm()
     {
-
+        if($this->login === true) {
+            $this->login = false;
+        } else {
+            $this->login = true;
+        }
     }
 
 

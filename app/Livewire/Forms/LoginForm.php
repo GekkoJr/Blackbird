@@ -31,4 +31,9 @@ class LoginForm extends Form
             ]);
         }
     }
+
+    public function switchForm()
+    {
+        dispatch('switchForm');
+    }
 }

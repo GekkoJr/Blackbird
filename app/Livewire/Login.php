@@ -10,7 +10,7 @@ class Login extends Component
     public LoginForm $form;
 
     public function save() {
-
+        $this->form->login();
     }
 
     public function render()
@@ -23,6 +23,7 @@ class Login extends Component
             @error('form.email') {{ $message }}@enderror
             <input wire:model.live="form.password" type="password" name="password"
             @error('form.password') {{ $message }}@enderror
+            <p wire:click="switchForm">Alredy have an acoount? click here</p>
             <button type="submit">Login</button>
         </form>
         HTML;

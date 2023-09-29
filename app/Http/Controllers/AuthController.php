@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Livewire\Login;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,15 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function loginPage()
-    {
-        if(Auth::check()) {
-            return redirect(route('app'));
-        }
-
-        return view('login');
-    }
-
+    // this controller can handle auth
     public function createUser(Request $request)
     {
         $validated = $request->validate([
@@ -51,5 +44,4 @@ class AuthController extends Controller
             'email' => 'your email or password is incorecct'
         ]);
     }
-
 }

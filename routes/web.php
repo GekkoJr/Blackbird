@@ -18,9 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('test');
 });
+Route::get('/login', \App\Livewire\Login::class)->name('login');
+
 Route::post('chat', [ChatController::class, 'chat'])->name('sendMessage');
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'loginPage')->name('login');
     Route::post('/createUser', 'createUser')->name('createUser');
 });
+

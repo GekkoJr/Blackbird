@@ -22,7 +22,7 @@ import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
 
-let laravelEcho = new Echo({
+window.Echo = new Echo({
     broadcaster: 'pusher',
     key: import.meta.env.VITE_PUSHER_APP_KEY,
 //    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
@@ -34,13 +34,7 @@ let laravelEcho = new Echo({
 });
 
 setTimeout(function () {
-    let socket = laravelEcho.socketId()
+    let socket = window.Echo.socketId()
     console.log("your connnection id is:" + socket)
-
-    laravelEcho.channel('chat')
-        .listen('Message', (e) => {
-            console.log(e);
-        });
-
 }, 2000)
 

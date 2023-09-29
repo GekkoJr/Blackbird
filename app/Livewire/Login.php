@@ -15,7 +15,7 @@ class Login extends Component
 
     public function switchForm()
     {
-        dispatch('switchForm');
+        $this->dispatch('switchForm');
     }
 
     public function render()

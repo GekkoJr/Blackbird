@@ -31,7 +31,7 @@ class Signup extends Component
             @error('form.password') {{ $message}}@enderror
             <input wire:model="form.email" type="email" placeholder="email" name="email">
             @error('form.email') {{ $message}}@enderror
-            <input wire:model="verify_password" type="password" placeholder="password verify" name="verify_password">
+            <input wire:model="form.verify_password" type="password" placeholder="password verify" name="verify_password">
             @error('form.error') {{ $message}}@enderror
             <button type="submit">Login</button>
             <p wire:click="switchForm">Alredy have an acoount? click here</p>

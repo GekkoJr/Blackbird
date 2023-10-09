@@ -10,10 +10,10 @@ use Livewire\Form;
 
 class SignupForm extends Form
 {
-    #[Rule('required|alpha_num|min:3|max:50|unique:user')]
+    #[Rule('required|alpha_num|min:3|max:50|unique:users,username')]
     public $username;
 
-    #[Rule('required|email|unique:user')]
+    #[Rule('required|email|unique:users,email')]
     public $email;
 
     #[Rule('required|min:8|max:100')]

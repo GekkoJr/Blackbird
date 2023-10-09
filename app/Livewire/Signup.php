@@ -30,6 +30,7 @@ class Signup extends Component
             <input type="email" placeholder="email" name="email">
             <input type="password" placeholder="password verify" name="verify_password"
             <button type="submit">Signup</button>
+            <p wire:click="switchForm">Alredy have an acoount? click here</p>
         </form>
         HTML;
     }

@@ -18,12 +18,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('test');
 });
-Route::get('/login', \App\Livewire\LoginAndSignup::class)->name('login');
+Route::get('/login', \App\Livewire\LoginAndSignup::class)
+    ->name('login')
+    ->middleware('loginCheck');
 
-Route::post('chat', [ChatController::class, 'chat'])->name('sendMessage');
+Route::get('/app', \App\Livewire\App::class)
+    ->name('home');
 
+Route::post('chat', [ChatController::class, 'chat'])
+    ->name('sendMessage');
+
+// not needed but nice to have (should probably be in api)
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/createUser', 'createUser')->name('createUser');
-    Route::post('/loginUser', 'loginUser')->name('loginUser');
+    Route::post('/createUser', 'createUser')
+        ->name('createUser');
+
+    Route::post('/loginUser', 'loginUser')
+        ->name('loginUser');
 });
 

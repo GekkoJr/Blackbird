@@ -29,7 +29,7 @@ class Message implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new Channel('chat'),
+            new Channel('global'),
         ];
     }
 }

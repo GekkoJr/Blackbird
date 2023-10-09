@@ -2,6 +2,7 @@
 
 namespace App\Livewire\AppComponents;
 
+use App\Models\GlobalMessage;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -21,7 +22,7 @@ class MainView extends Component
 
             if($channel === 'global')
             {
-
+                $this->messages = GlobalMessage::latest()->take(10)->get();
             }
         }
     }

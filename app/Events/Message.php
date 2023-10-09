@@ -16,9 +16,12 @@ class Message implements ShouldBroadcast
 
     public $message;
 
-    public function __construct($message)
+    public $where;
+
+    public function __construct($message, $where)
     {
         $this->message = $message;
+        $this->where = $where;
     }
 
     /**
@@ -28,8 +31,11 @@ class Message implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        return [
-            new Channel('global'),
-        ];
+        if ($this->type == 'global') {
+            return [
+                new Channel('global'),
+            ];
+        }
+
     }
 }

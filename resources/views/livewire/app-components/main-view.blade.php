@@ -1,8 +1,8 @@
 <div>
     {{-- In work, do what you enjoy. --}}
-    @if($channel)
+    @if($channel != 'placeholder')
         @foreach($messages as $message)
-            {{ $message }}
+            {{ $message->message }}
         @endforeach
     @else
         <p>TODO: FRIENDS</p>

@@ -12,17 +12,23 @@ class MainView extends Component
 
     public $messages = [];
 
+    public function mount()
+    {
+        $this->channel = 'placeholder';
+        array_push($this->messages, $this->channel);
+    }
+
 
     #[On('swap')]
     public function swapInterface($mode, $channel)
     {
-        if($mode === 'channel')
+        if ($mode === 'channel')
         {
             $this->channel = $channel;
 
-            if($channel === 'global')
+            if ($channel === 'global')
             {
-                $this->messages = GlobalMessage::latest()->take(10)->get();
+                $this->messages = GlobalMessage::latest()->take(10)->get('message');
             }
         }
     }

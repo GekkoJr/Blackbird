@@ -5,4 +5,7 @@
     @else
         <livewire:signup></livewire:signup>
     @endif
+    <div wire:loading>
+        <p>Loading</p>
+    </div>
 </div>

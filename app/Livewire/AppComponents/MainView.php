@@ -34,7 +34,7 @@ class MainView extends Component
     }
 
     #[On('echo:{channel},Message')]
-    public function updateMessages()
+    public function updateMessages($event)
     {
 
     }

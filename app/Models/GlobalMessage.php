@@ -12,5 +12,6 @@ class GlobalMessage extends Model
     public $table = 'global_messages';
     protected $fillable = [
         'message',
+        'fromUser',
     ];
 }

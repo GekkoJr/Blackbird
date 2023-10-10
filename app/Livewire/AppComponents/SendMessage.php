@@ -28,9 +28,9 @@ class SendMessage extends Component
     {
         if($this->channel == 'global')
         {
-            $username = Auth::user()->username;
+            $from = Auth::get()->username;
 
-            event(new Message($this->message, $this->channel, $username, 'placeholder'));
+            app('App\Http\Controllers\ChatController')->globalChat($this->message, $from);
         }
     }
 

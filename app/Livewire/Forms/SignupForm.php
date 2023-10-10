@@ -42,7 +42,7 @@ class SignupForm extends Form
         $user->email    = $this->email;
         $user->save();
 
-        if(Auth::attempt($this->only(['password', 'email'])))
+        if(Auth::attempt($this->email, $this->password))
         {
             return redirect(route('app'));
         }

@@ -23,7 +23,8 @@ Route::get('/login', \App\Livewire\LoginAndSignup::class)
     ->middleware('loginCheck');
 
 Route::get('/app', \App\Livewire\App::class)
-    ->name('home');
+    ->name('home')
+    ->middleware('auth');
 
 Route::post('chat', [ChatController::class, 'chat'])
     ->name('sendMessage');

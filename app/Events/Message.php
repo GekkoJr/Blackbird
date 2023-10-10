@@ -19,6 +19,10 @@ class Message implements ShouldBroadcast
     //where it should broadcast
     public $where;
 
+    public $from;
+
+    public $to;
+
     public function __construct($message, $where)
     {
         $this->message = $message;

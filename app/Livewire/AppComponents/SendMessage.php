@@ -29,7 +29,7 @@ class SendMessage extends Component
         if($this->channel == 'global')
         {
             $from = Auth::user()->username;
-
+            // sends chat via chatcontroller
             app('App\Http\Controllers\ChatController')->globalChat($this->message, $from);
         }
     }

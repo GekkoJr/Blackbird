@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // this controller can handle auth
+    // this controller can handle auth if needed
     public function createUser(Request $request)
     {
         $validated = $request->validate([

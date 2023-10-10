@@ -12,16 +12,13 @@ use Illuminate\Queue\SerializesModels;
 
 class Message implements ShouldBroadcast
 {
+    // this is for global chat ONLY
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
 
-    //where it should broadcast
-    public $where;
-
     public $from;
 
-    public $to;
 
     public function __construct($message, $from)
     {
@@ -36,15 +33,8 @@ class Message implements ShouldBroadcast
      */
     public function broadcastOn(): array
     {
-        if ($this->where == 'global') {
-            return [
-                new Channel('global'),
-            ];
-        }
-
         return [
-          new Channel($this->where)
+          new Channel('global')
         ];
-
     }
 }

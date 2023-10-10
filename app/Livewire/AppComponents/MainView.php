@@ -10,6 +10,7 @@ class MainView extends Component
 {
     public $channel;
 
+    // contains both me
     public $messages = [];
 
     public function mount()
@@ -18,7 +19,7 @@ class MainView extends Component
         array_push($this->messages, $this->channel);
     }
 
-
+    //this swappes between chat and friends view
     #[On('swap')]
     public function swapInterface($mode, $channel)
     {
@@ -28,7 +29,8 @@ class MainView extends Component
 
             if ($channel === 'global')
             {
-                $this->messages = GlobalMessage::latest()->take(10)->get('message');
+                $this->messages = GlobalMessage::latest()->take(10)->get();
+
             }
         }
     }

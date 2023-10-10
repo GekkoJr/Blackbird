@@ -13,9 +13,9 @@ class SendMessage extends Component
 
     public string $channel;
 
-    public function mount()
+    public function mount($channel)
     {
-        $this->channel = 'placeholder';
+        $this->channel = $channel;
     }
 
     #[On('swap')]
@@ -28,7 +28,7 @@ class SendMessage extends Component
     {
         if($this->channel == 'global')
         {
-            $from = Auth::get()->username;
+            $from = Auth::user()->username;
 
             app('App\Http\Controllers\ChatController')->globalChat($this->message, $from);
         }

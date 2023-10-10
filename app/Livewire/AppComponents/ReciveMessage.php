@@ -10,8 +10,6 @@ class ReciveMessage extends Component
 {
     public $messages = [];
 
-    public $event;
-
     public string $channel;
 
     public function mount($channel)
@@ -24,7 +22,8 @@ class ReciveMessage extends Component
     #[On('echo:{channel},Message')]
     public function updateMessages($event)
     {
-        $this->event = $event;
+        $event['fromUser'] = $event['from'];
+        array_push($this->messages, $event);
     }
 
     public function load()

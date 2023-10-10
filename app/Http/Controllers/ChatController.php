@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    public function chat(request $request) {
-        event(new Message($request->input('message')));
+    public function globalChat($from, $message) {
+
     }
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('global_messages', function (Blueprint $table) {
             $table->id();
             $table->string('message');
+            $table->string('fromUser');
             $table->timestamps();
         });
     }

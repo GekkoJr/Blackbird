@@ -23,10 +23,12 @@ class Message implements ShouldBroadcast
 
     public $to;
 
-    public function __construct($message, $where)
+    public function __construct($message, $where, $from, $to)
     {
         $this->message = $message;
         $this->where = $where;
+        $this->from = $from;
+        $this->to = $to;
     }
 
     /**

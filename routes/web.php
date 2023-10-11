@@ -23,6 +23,8 @@ Route::get('/app', \App\Livewire\App::class)
     ->name('home')
     ->middleware('auth');
 
+Route::view('/', 'welcome');
+
 // not needed but nice to have (should probably be in api)
 Route::controller(AuthController::class)->group(function () {
     Route::post('/createUser', 'createUser')

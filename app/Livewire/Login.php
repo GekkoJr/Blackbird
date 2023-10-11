@@ -28,6 +28,7 @@ class Login extends Component
             <label>
             <p>Email</p>
             <input wire:model="form.email" type="email" name="email"></label>
+
             @error('form.email') {{ $message }}@enderror
             <label>
             <p>Password</p>

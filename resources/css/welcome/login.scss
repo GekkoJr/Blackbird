@@ -48,14 +48,11 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 99dvw;
-    height: 99dvh;
+    width: 100dvw;
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-body {
-    flex-wrap: wrap;
-    margin: 0;
-}
+

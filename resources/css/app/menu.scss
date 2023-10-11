@@ -1,7 +1,6 @@
 .mainMenu {
     border-right: 2px solid $surface1;
     height: 100%;
-    margin-top: 30px;
 
     button {
         width: 95%;
@@ -30,4 +29,8 @@
             background-color: $surface0;
         }
     }
+}
+
+.filler30px {
+    height: 30px;
 }

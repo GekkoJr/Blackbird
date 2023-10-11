@@ -1,4 +1,4 @@
-<div>
+<div class="mainView">
     {{-- In work, do what you enjoy. --}}
     {{-- This components mostly handels the logic of the app --}}
     @if($channel != 'placeholder')

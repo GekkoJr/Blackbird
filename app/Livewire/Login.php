@@ -24,12 +24,16 @@ class Login extends Component
         <form wire:submit="save" class="loginForm">
         @csrf
             {{-- If your happiness depends on money, you will never be happy with yourself. --}}
-            <input wire:model="form.email" type="email" name="email">
+            <label>
+            <p>Email</p>
+            <input wire:model="form.email" type="email" name="email"></label>
             @error('form.email') {{ $message }}@enderror
-            <input wire:model="form.password" type="password" name="password"
+            <label>
+            <p>Password</p>
+            <input wire:model="form.password" type="password" name="password"></label>
             @error('form.password') {{ $message }}@enderror
-            <p wire:click="switchForm">Are you new? click here</p>
             <button type="submit">Login</button>
+            <p wire:click="switchForm">Are you new? click here</p>
         </form>
         HTML;
     }

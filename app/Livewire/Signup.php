@@ -25,13 +25,21 @@ class Signup extends Component
         <form wire:submit="signup" class="loginForm">
             {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
             @csrf
-            <input wire:model="form.username" type="text" placeholder="username" name="username">
+            <label>
+            <p>Username</p>
+            <input wire:model="form.username" type="text" name="username"></label>
             @error('form.username') {{ $message}}@enderror
-            <input wire:model="form.password" type="password" placeholder="password" name="password">
-            @error('form.password') {{ $message}}@enderror
-            <input wire:model="form.email" type="email" placeholder="email" name="email">
+            <label>
+            <p>Email</p>
+            <input wire:model="form.email" type="email" name="email"></label>
             @error('form.email') {{ $message}}@enderror
-            <input wire:model="form.verify_password" type="password" placeholder="password verify" name="verify_password">
+            <label>
+            <p>Password</p>
+            <input wire:model="form.password" type="password" name="password"></label>
+            @error('form.password') {{ $message}}@enderror
+            <label>
+            <p>Verify password</p>
+            <input wire:model="form.verify_password" type="password" name="verify_password"></label>
             @error('form.error') {{ $message}}@enderror
             <button type="submit">Login</button>
             <p wire:click="switchForm">Alredy have an acoount? click here</p>

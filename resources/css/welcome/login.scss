@@ -5,26 +5,41 @@
     display: flex;
     flex-wrap: wrap;
     max-width: 500px;
+    border-radius: 10px;
+    justify-content: center;
 
-    input {
+    label {
+        flex: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    label input {
         flex: 100%;
         background-color: $surface0;
         border-radius: 10px;
         box-shadow: none;
         height: 30px;
         color: $text;
-        margin-top: 8px;
         border: none;
 
     }
 
     button {
         flex: 100%;
-        background-color: $surface1;
+        background-color: $surface0;
         border-radius: 10px;
         color: $text;
         height: 30px;
-        box-shadow: none;
-        border: none;
+        border: 1px solid $surface0;
+        margin-top: 15px;
+
+        &:hover {
+            background-color: $surface1;
+        }
+    }
+
+    p {
+        justify-self: center;
     }
 }

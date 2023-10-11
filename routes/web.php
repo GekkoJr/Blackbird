@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('test');
-});
 Route::get('/login', \App\Livewire\LoginAndSignup::class)
     ->name('login')
     ->middleware('loginCheck');
@@ -25,9 +22,6 @@ Route::get('/login', \App\Livewire\LoginAndSignup::class)
 Route::get('/app', \App\Livewire\App::class)
     ->name('home')
     ->middleware('auth');
-
-Route::post('chat', [ChatController::class, 'chat'])
-    ->name('sendMessage');
 
 // not needed but nice to have (should probably be in api)
 Route::controller(AuthController::class)->group(function () {

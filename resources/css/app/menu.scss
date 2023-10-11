@@ -1,0 +1,33 @@
+.mainMenu {
+    border-right: 2px solid $surface1;
+    height: 100%;
+    margin-top: 30px;
+
+    button {
+        width: 95%;
+        margin: auto;
+        border-radius: 10px;
+        height: 35px;
+        padding: 7px 0;
+        display: flex;
+        align-items: center;
+        border: none;
+        background-color: $base;
+
+        p {
+            color: $text;
+            font-size: 1.5em;
+            text-align: left;
+        }
+
+        img {
+            filter: invert(85%) sepia(14%) saturate(397%) hue-rotate(190deg) brightness(97%) contrast(97%);
+            height: 27px;
+            margin: 0 5px
+        }
+
+        &:hover {
+            background-color: $surface0;
+        }
+    }
+}

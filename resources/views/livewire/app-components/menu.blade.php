@@ -1,6 +1,7 @@
-<div>
+<div class="mainMenu">
     {{-- Some of the menu options are hardcoded --}}
-    <div wire:click="global">
+    <button wire:click="global">
+        <img src="/icons/global.svg">
         <p>Global</p> <!-- add icon -->
-    </div>
+    </button>
 </div>

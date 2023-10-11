@@ -1,0 +1,20 @@
+.mainAppLayout {
+    display: flex;
+
+    height: 100%;
+
+    :nth-child(1) {
+        flex: 2;
+    }
+
+    :nth-child(2) {
+        flex: 12;
+    }
+}
+
+body {
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow-y: hidden;
+}
+

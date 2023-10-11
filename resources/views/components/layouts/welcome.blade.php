@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        @vite('resources/css/welcome.css')
+        @vite('resources/css/welcome.scss')
         <title>{{ $title ?? 'Page Title' }}</title>
     </head>
     <body>

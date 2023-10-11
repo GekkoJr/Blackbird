@@ -1,0 +1,29 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: $mantle;
+
+    a {
+        flex: 1;
+        display: block;
+        padding: 0 20px;
+    }
+
+    :nth-child(2) {
+        text-align: right;
+    }
+}
+
+.headerLink {
+    text-decoration: none;
+    color: $text;
+
+    &:hover {
+        color: $blue;
+    }
+}
+
+.headerFunColor {
+    color: $green;
+}

@@ -22,6 +22,7 @@ class Signup extends Component
     public function render()
     {
         return <<<'HTML'
+        <div class="centerLogin">
         <form wire:submit="signup" class="loginForm">
             {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
             @csrf
@@ -44,6 +45,7 @@ class Signup extends Component
             <button type="submit">Login</button>
             <p wire:click="switchForm">Alredy have an acoount? click here</p>
         </form>
+        </div>
         HTML;
     }
 }

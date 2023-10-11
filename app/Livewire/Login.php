@@ -21,6 +21,7 @@ class Login extends Component
     public function render()
     {
         return <<<'HTML'
+        <div class="centerLogin">
         <form wire:submit="save" class="loginForm">
         @csrf
             {{-- If your happiness depends on money, you will never be happy with yourself. --}}
@@ -35,6 +36,7 @@ class Login extends Component
             <button type="submit">Login</button>
             <p wire:click="switchForm">Are you new? click here</p>
         </form>
+        </div>
         HTML;
     }
 }

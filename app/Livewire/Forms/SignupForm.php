@@ -28,10 +28,9 @@ class SignupForm extends Form
 
         if($this->password !== $this->verify_password)
         {
-            return back()->withErrors([
-                'password' => 'passwords does not match'
-            ]);
+            return back()->with('password_match', 'passwords does not match');
         }
+        $this->originalPassword = $this->password;
 
         $this->password = Hash::make($this->password);
 
@@ -44,12 +43,12 @@ class SignupForm extends Form
 
         $credentials = [
             'email' => $this->email,
-            'password' => $this->password,
+            'password' => $this->originalPassword,
         ];
 
         if(Auth::attempt($credentials))
         {
-            return redirect(route('app'));
+            return redirect(route('home'));
         }
         return back();
 

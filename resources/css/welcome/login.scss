@@ -55,4 +55,19 @@
     justify-content: center;
 }
 
+.error {
+    display: flex;
+    font-size: 0.7em;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+    margin-top: 5px;
+
+    img {
+        height: 20px;
+
+        // this turns the svgs from black to red
+        filter: invert(64%) sepia(16%) saturate(1147%) hue-rotate(294deg) brightness(99%) contrast(92%);
+    }
+}
 

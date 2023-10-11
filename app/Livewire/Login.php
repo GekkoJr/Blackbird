@@ -28,12 +28,15 @@ class Login extends Component
             <label>
             <p>Email</p>
             <input wire:model="form.email" type="email" name="email"></label>
-
-            @error('form.email') {{ $message }}@enderror
+            <div class="error">
+            @error('form.email') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }}@enderror
+            </div>
             <label>
             <p>Password</p>
             <input wire:model="form.password" type="password" name="password"></label>
-            @error('form.password') {{ $message }}@enderror
+            <div class="error">
+            @error('form.password') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }}@enderror
+            </div>
             <button type="submit">Login</button>
             <p wire:click="switchForm">Are you new? click here</p>
         </form>

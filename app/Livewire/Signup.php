@@ -19,6 +19,7 @@ class Signup extends Component
         $this->form->signup();
     }
 
+    //I am never making such a large inline componenent ever again :(
     public function render()
     {
         return <<<'HTML'
@@ -29,19 +30,27 @@ class Signup extends Component
             <label>
             <p>Username</p>
             <input wire:model="form.username" type="text" name="username"></label>
-            @error('form.username') {{ $message}}@enderror
+            <div class="error">
+            @error('form.username') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }} @enderror
+            </div>
             <label>
             <p>Email</p>
             <input wire:model="form.email" type="email" name="email"></label>
-            @error('form.email') {{ $message}}@enderror
+            <div class="error">
+            @error('form.email') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }}@enderror
+            </div>
             <label>
             <p>Password</p>
             <input wire:model="form.password" type="password" name="password"></label>
-            @error('form.password') {{ $message}}@enderror
+            <div class="error">
+            @error('form.password') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message}}@enderror
+            </div>
             <label>
             <p>Verify password</p>
             <input wire:model="form.verify_password" type="password" name="verify_password"></label>
-            @error('form.error') {{ $message}}@enderror
+            <div class="error">
+            @error('form.error') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message}}@enderror
+            </div>
             <button type="submit">Login</button>
             <p wire:click="switchForm">Alredy have an acoount? click here</p>
         </form>

@@ -3,5 +3,4 @@
         Blackbird
     </x-slot:title>
 
-
 </x-layouts.welcome>

@@ -1,5 +1,30 @@
 // style for login and signup page
 .loginForm {
-    background-color: $overlay0;
+    background-color: $mantle;
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 500px;
+
+    input {
+        flex: 100%;
+        background-color: $surface0;
+        border-radius: 10px;
+        box-shadow: none;
+        height: 30px;
+        color: $text;
+        margin-top: 8px;
+        border: none;
+
+    }
+
+    button {
+        flex: 100%;
+        background-color: $surface1;
+        border-radius: 10px;
+        color: $text;
+        height: 30px;
+        box-shadow: none;
+        border: none;
+    }
 }

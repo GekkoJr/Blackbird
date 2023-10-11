@@ -45,8 +45,11 @@
 }
 
 .centerLogin {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 99dvw;
-    height: 98dvh;
+    height: 99dvh;
     display: flex;
     align-items: center;
     justify-content: center;

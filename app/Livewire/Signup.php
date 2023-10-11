@@ -22,7 +22,7 @@ class Signup extends Component
     public function render()
     {
         return <<<'HTML'
-        <form wire:submit="signup">
+        <form wire:submit="signup" class="loginForm">
             {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
             @csrf
             <input wire:model="form.username" type="text" placeholder="username" name="username">

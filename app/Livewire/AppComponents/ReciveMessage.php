@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ReciveMessage extends Component
 {
-    public $messages = [];
+    public array $messages = [];
 
     public string $channel;
 
@@ -22,6 +22,7 @@ class ReciveMessage extends Component
     #[On('echo:{channel},Message')]
     public function updateMessages($event)
     {
+        // yes this is just here to rename it, it is not the best, but it works
         $event['fromUser'] = $event['from'];
         array_push($this->messages, $event);
     }

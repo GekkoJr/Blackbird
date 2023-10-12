@@ -8,9 +8,9 @@ use Livewire\Component;
 
 class MainView extends Component
 {
-    public $channel;
+    public string $channel;
 
-    public $mode;
+    public string $mode;
 
     public function mount()
     {

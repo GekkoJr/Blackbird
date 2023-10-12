@@ -38,7 +38,7 @@ class Login extends Component
             @error('form.password') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }}@enderror
             </div>
             <button type="submit">Login</button>
-            <p wire:click="switchForm">Are you new? click here</p>
+            <p>Are you new? <span  wire:click="switchForm" class="link">click here</span> </p>
         </form>
         </div>
         HTML;

@@ -52,7 +52,7 @@ class Signup extends Component
             @error('form.error') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message}}@enderror
             </div>
             <button type="submit">Login</button>
-            <p wire:click="switchForm">Alredy have an acoount? click here</p>
+            <p>Alredy have an acoount? <span class="link" wire:click="switchForm">click here</span> </p>
         </form>
         </div>
         HTML;

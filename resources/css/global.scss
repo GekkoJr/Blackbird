@@ -6,5 +6,13 @@ body {
     color: $text;
     font-size: 20px;
     margin: 0;
+}
 
+.link {
+    color: $blue;
+
+    &:hover {
+        color: $maroon;
+        cursor: grab;
+    }
 }

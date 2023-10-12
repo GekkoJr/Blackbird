@@ -9,20 +9,6 @@ use Livewire\Component;
 
 class LoginAndSignup extends Component
 {
-    // variable for checking if you are logging in or signing up
-    public $login = true;
-
-    #[On('switchForm')]
-    public function switchForm()
-    {
-        if($this->login === true) {
-            $this->login = false;
-        } else {
-            $this->login = true;
-        }
-    }
-
-
     #[Title('Login')]
     public function render()
     {

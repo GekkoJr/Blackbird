@@ -1,11 +1,9 @@
 <div>
     {{-- Be like water. --}}
-    @if( $login)
+    <div x-data="{ toggle: true }">
         <livewire:Login></livewire:Login>
-    @else
-        <livewire:signup></livewire:signup>
-    @endif
-    <div wire:loading>
-        <p>Loading</p>
+
+       <livewire:signup></livewire:signup>
     </div>
+
 </div>

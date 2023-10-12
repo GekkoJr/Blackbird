@@ -21,7 +21,7 @@ class Login extends Component
     public function render()
     {
         return <<<'HTML'
-        <div class="centerLogin">
+        <div x-show="toggle" class="centerLogin" x-transition>
         <form wire:submit="save" class="loginForm">
         @csrf
             {{-- If your happiness depends on money, you will never be happy with yourself. --}}
@@ -38,7 +38,7 @@ class Login extends Component
             @error('form.password') {{ print '<span class="material-symbols-outlined">error</span>' . $message }}@enderror
             </div>
             <button type="submit">Login</button>
-            <p>Are you new? <span  wire:click="switchForm" class="link">click here</span> </p>
+            <p>Are you new? <span  x-on:click="toggle = ! toggle" class="link">click here</span> </p>
         </form>
         </div>
         HTML;

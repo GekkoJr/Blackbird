@@ -11,6 +11,12 @@ class Menu extends Component
         $this->dispatch('swap', mode: 'channel', channel: 'global');
     }
 
+    public function friends()
+    {
+        // when channel is not in use, use placeholder if not error :(
+        $this->dispatch('swap', mode: 'friends');
+    }
+
     public function render()
     {
         return view('livewire.app-components.menu');

@@ -19,8 +19,13 @@ class SendMessage extends Component
     }
 
     #[On('swap')]
-    public function swapChannel($channel)
+    public function swapChannel($channel = null)
     {
+        // stopps from crashing when in friends mode
+        if(!isset($channel)) {
+            $channel = 'placeholder';
+        }
+
         $this->channel = $channel;
     }
 

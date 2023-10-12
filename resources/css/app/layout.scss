@@ -1,7 +1,7 @@
 .mainAppLayout {
     display: flex;
 
-    height: 100%;
+    height: calc(100% - 65px);
 
     :nth-child(1) {
         flex: 2;

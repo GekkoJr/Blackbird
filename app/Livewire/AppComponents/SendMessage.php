@@ -31,6 +31,8 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
+        $this->message = '';
+
         if($this->channel == 'global')
         {
             $from = Auth::user()->username;

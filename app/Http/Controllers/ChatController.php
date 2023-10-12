@@ -10,11 +10,15 @@ class ChatController extends Controller
 {
     public function globalChat($message, $from)
     {
-        $globalMessage = new GlobalMessage;
-        $globalMessage->message  = $message;
-        $globalMessage->fromUser = $from;
-        $globalMessage->save();
+        if ($message !== '')
+        {
+            $globalMessage = new GlobalMessage;
+            $globalMessage->message = $message;
+            $globalMessage->fromUser = $from;
+            $globalMessage->save();
 
-        event(new Message($message, $from));
+            event(new Message($message, $from));
+        }
+
     }
 }

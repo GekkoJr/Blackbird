@@ -31,27 +31,27 @@ class Signup extends Component
             <p>Username</p>
             <input wire:model="form.username" type="text" name="username"></label>
             <div class="error">
-            @error('form.username') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }} @enderror
+            @error('form.username') {{ print '<span class="material-symbols-outlined">error</span>' . $message }} @enderror
             </div>
             <label>
             <p>Email</p>
             <input wire:model="form.email" type="email" name="email"></label>
             <div class="error">
-            @error('form.email') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message }}@enderror
+            @error('form.email') {{ print '<span class="material-symbols-outlined">error</span>' . $message }}@enderror
             </div>
             <label>
             <p>Password</p>
             <input wire:model="form.password" type="password" name="password"></label>
             <div class="error">
-            @error('form.password') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message}}@enderror
+            @error('form.password') {{ print '<span class="material-symbols-outlined">error</span>' . $message}}@enderror
             </div>
             <label>
             <p>Verify password</p>
             <input wire:model="form.verify_password" type="password" name="verify_password"></label>
             <div class="error">
-            @error('form.error') {{ print '<img src="/icons/error.svg" alt="errorIcon">' . $message}}@enderror
+            @error('form.error') {{ print '<span class="material-symbols-outlined">error</span>' . $message}}@enderror
             </div>
-            <button type="submit">Login</button>
+            <button type="submit">Signup</button>
             <p>Alredy have an acoount? <span class="link" wire:click="switchForm">click here</span> </p>
         </form>
         </div>

@@ -73,13 +73,12 @@
     align-items: center;
     justify-content: left;
     width: 100%;
-    margin-top: 5px;
+    margin-top: -8px;
+    margin-bottom: 15px;
 
-    img {
-        height: 20px;
-
-        // this turns the svgs from black to red
-        filter: invert(64%) sepia(16%) saturate(1147%) hue-rotate(294deg) brightness(99%) contrast(92%);
+    span.material-symbols-outlined {
+        font-size: 20px;
+        color: $red;
     }
 }
 

@@ -15,15 +15,19 @@ class Message implements ShouldBroadcast
     // this is for global chat ONLY
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    public string $message;
 
-    public $from;
+    public string $from;
+
+    // time
+    public $created_at;
 
 
-    public function __construct($message, $from)
+    public function __construct($message, $from, $time)
     {
         $this->message = $message;
         $this->from = $from;
+        $this->created_at = $time;
     }
 
     /**

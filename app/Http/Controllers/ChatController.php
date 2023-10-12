@@ -17,7 +17,7 @@ class ChatController extends Controller
             $globalMessage->fromUser = $from;
             $globalMessage->save();
 
-            event(new Message($message, $from));
+            event(new Message($message, $from, $globalMessage->created_at));
         }
 
     }

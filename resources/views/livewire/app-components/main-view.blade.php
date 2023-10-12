@@ -7,6 +7,6 @@
         <livewire:app-components.send-message channel="{{ $channel }}"></livewire:app-components.send-message>
         </div>
     @elseif($mode === 'friends')
-        <p>TODO: FRIENDS</p>
+        <p>TODO: FIND FRIENDS</p>
     @endif
 </div>

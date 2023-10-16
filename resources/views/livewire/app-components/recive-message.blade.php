@@ -10,17 +10,19 @@
                 $diff = $date->diffInSeconds($previousDate);
                 $togheter = ($diff < 60);
 
-                if(!$togheter) {
+                if(!$togheter || $previousAuthor != $message['fromUser']) {
                     $previousDate = $date;
+                    $previousAuthor = $message['fromUser'];
                 }
 
             } else {
                 $previousDate = $date;
+                $previousAuthor = $message['fromUser'];
             }
 
         @endphp
         <div>
-            @if(!$togheter)
+            @if(!$togheter || $previousAuthor != $message['fromUser'])
             <div class="nameAndTime">
                 <p>{{ $message['fromUser'] }}</p>
                 <p class="timeSendt">{{ $date }}</p>

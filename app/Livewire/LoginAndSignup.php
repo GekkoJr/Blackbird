@@ -2,8 +2,6 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Layout;
-use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
 

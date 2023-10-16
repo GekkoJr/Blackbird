@@ -3,7 +3,7 @@
     @foreach($messages as $message)
         @php
             $togheter = false;
-            // this pains me
+            // this pains me, i dont like this much php in the top of a file :(
             $date = new \Carbon\Carbon($message['created_at']);
             $date->format('d/m/Y H:i');
             if(isset($previousDate)) {

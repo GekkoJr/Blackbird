@@ -4,8 +4,6 @@ namespace App\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -22,7 +20,6 @@ class Message implements ShouldBroadcast
     // time
     public $created_at;
 
-
     public function __construct($message, $from, $time)
     {
         $this->message = $message;
@@ -38,7 +35,7 @@ class Message implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-          new Channel('global')
+            new Channel('global'),
         ];
     }
 }

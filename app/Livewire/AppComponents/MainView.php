@@ -2,7 +2,6 @@
 
 namespace App\Livewire\AppComponents;
 
-
 use Livewire\Attributes\On;
 use Livewire\Component;
 
@@ -22,18 +21,16 @@ class MainView extends Component
     #[On('swap')]
     public function swapInterface($mode, $channel = null)
     {
-        if ($mode === 'channel')
-        {
+        if ($mode === 'channel') {
             $this->channel = $channel;
             $this->mode = 'channel';
         }
-        if($mode === 'friends') {
+        if ($mode === 'friends') {
             // stops listening for events
             $this->channel = 'placeholder';
             $this->mode = 'friends';
         }
     }
-
 
     public function render()
     {

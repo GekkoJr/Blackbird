@@ -2,7 +2,6 @@
 
 namespace App\Livewire\AppComponents;
 
-use App\Events\Message;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -22,7 +21,7 @@ class SendMessage extends Component
     public function swapChannel($channel = null)
     {
         // stopps from crashing when in friends mode
-        if(!isset($channel)) {
+        if (! isset($channel)) {
             $channel = 'placeholder';
         }
 
@@ -31,8 +30,7 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
-        if($this->channel == 'global')
-        {
+        if ($this->channel == 'global') {
             $from = Auth::user()->username;
             // sends chat via chatcontroller
             app('App\Http\Controllers\ChatController')->globalChat($this->message, $from);

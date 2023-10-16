@@ -23,14 +23,12 @@ class LoginForm extends Form
             'password' => $this->password,
         ];
 
-        if(Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) {
             return redirect(route('home'));
         } else {
             return back()->withErrors([
-                'error' => 'Invalid credentials'
+                'error' => 'Invalid credentials',
             ]);
         }
     }
-
-
 }

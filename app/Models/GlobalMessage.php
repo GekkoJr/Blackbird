@@ -10,6 +10,7 @@ class GlobalMessage extends Model
     use HasFactory;
 
     public $table = 'global_messages';
+
     protected $fillable = [
         'message',
         'fromUser',

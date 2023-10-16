@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Livewire\Login;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +16,7 @@ class AuthController extends Controller
             'email' => 'required|unique:user|email',
             'username' => 'required|unique:user|alpha_num|between:3,50',
             'password' => 'required',
-            'display_name' => 'required'
+            'display_name' => 'required',
         ]);
 
         $user = new User;
@@ -33,15 +32,15 @@ class AuthController extends Controller
     {
         $validated = $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($validated)) {
+        if (Auth::attempt($validated)) {
             return redirect(route('home'));
         }
 
         return back()->withErrors([
-            'email' => 'your email or password is incorecct'
+            'email' => 'your email or password is incorecct',
         ]);
     }
 }

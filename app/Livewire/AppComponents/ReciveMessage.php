@@ -30,10 +30,8 @@ class ReciveMessage extends Component
 
     public function load()
     {
-        if($this->channel !== 'placeholder')
-        {
-            if($this->channel == 'global')
-            {
+        if ($this->channel !== 'placeholder') {
+            if ($this->channel == 'global') {
                 // loads the messages (since it is global no need to find spesific channel)
                 $this->messages = GlobalMessage::latest('created_at')->take(20)->get()->reverse()->toArray();
                 $this->dateFixer();
@@ -43,8 +41,7 @@ class ReciveMessage extends Component
 
     public function dateFixer()
     {
-        foreach ($this->messages as $message)
-        {
+        foreach ($this->messages as $message) {
             $message['created_at'] = new Carbon($message['created_at']);
             $message['created_at']->format('d m H i');
         }

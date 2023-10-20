@@ -39,6 +39,7 @@ class ReciveMessage extends Component
         }
     }
 
+    // dont know if this is needed for it to work
     public function dateFixer()
     {
         foreach ($this->messages as $message) {

@@ -12,10 +12,6 @@ class FriendshipController extends Controller
     //
     public function addFriend($username)
     {
-        if(!User::where('username', $username)) {
-            return back();
-        }
-
         $currentUser = Auth::user();
         $userToAdd   = User::where('username', $username)->get();
 

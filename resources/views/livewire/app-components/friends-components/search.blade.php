@@ -12,7 +12,7 @@
                     <p>
                          {{ $user->username }}
                     </p>
-                    <button wire:click="sendRequest({{ $user->username }})">Add friend</button>
+                    <button wire:click="sendRequest('{{ $user->username }}')">Add friend</button>
                 </div>
             @endforeach
         @endif

@@ -21,11 +21,15 @@ class FriendshipController extends Controller
             ]);
         }
 
-        foreach ($currentUser->friendships as $friend){
-            $friend->users()->where('user_id', $userToAdd->id)->exists();
-            if($friend) {
+        foreach ($currentUser->getOtherUsersIdFromFriends() as $userId) {
+            if($currentUser->id === $userId) {
                 return back()->withErrors([
-                   'error' => 'Already Friends'
+                    'error' => 'Are you really that lonely'
+                ]);
+            }
+            if($userId === $userToAdd->id) {
+                return back()->withErrors([
+                    'error' => 'you are already friends'
                 ]);
             }
         }

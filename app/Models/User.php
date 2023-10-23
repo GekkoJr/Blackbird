@@ -49,4 +49,21 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Friendship::class);
     }
+
+    public function getOtherUsersIdFromFriends()
+    {
+        $users = [];
+
+        foreach ($this->friendships as $friend) {
+            $toAdd = $friend->users()->get();
+
+            foreach ($toAdd as $user){
+                if($this->id !== $user->id)
+                array_push($users, $user->id);
+            }
+
+        }
+
+        return $users;
+    }
 }

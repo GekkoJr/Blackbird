@@ -14,5 +14,4 @@
     <div x-show="toggle === 3">
         <livewire:app-components.friends-components.pending></livewire:app-components.friends-components.pending>
     </div>
-    <livewire:test></livewire:test>
 </div>

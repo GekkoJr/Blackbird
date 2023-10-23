@@ -6,12 +6,16 @@
     </label>
     <div class="LoadingCircle" wire:dirty>loading</div>
     <div class="UserSearchResult">
+        @foreach($errors as $error)
+            <p>{{ $error }}</p>
+        @endforeach
         @if($users)
             @foreach($users as $user)
                 <div>
                     <p>
-                         {{ $user->username }}
+                        {{ $user->username }}
                     </p>
+
                     <button wire:click="sendRequest('{{ $user->username }}')">Add friend</button>
                 </div>
             @endforeach

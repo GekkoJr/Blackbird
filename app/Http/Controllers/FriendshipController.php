@@ -13,7 +13,7 @@ class FriendshipController extends Controller
     public function addFriend($username)
     {
         $currentUser = Auth::user();
-        $userToAdd   = User::where('username', $username)->get();
+        $userToAdd   = User::where('username', $username)->first();
 
         $friendship =  new Friendship;
         $friendship->pending = $currentUser->id;

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,10 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/loginUser', 'loginUser')
         ->name('loginUser');
 });
+
+Route::get('/test', function () {
+    return Inertia::render('Test', [
+        'name' => 'gekko',
+        'frameworks' => ['vue', 'laravel', 'inertia']
+    ]);
+} );

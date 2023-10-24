@@ -50,6 +50,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Friendship::class);
     }
 
+    // these should maybe be in a controller, but they are related to getting date, so it's ok ish
     public function getOtherUsersIdFromFriends()
     {
         $users = [];
@@ -86,5 +87,27 @@ class User extends Authenticatable
         }
 
         return $friendships;
+    }
+
+    public function getFriendshipsAndChannels()
+    {
+        $friendshipsAndChannels = [];
+
+        foreach ($this->friendships as $friend) {
+            $userAndChannel = [];
+
+            // channel id
+            array_push($userAndChannel, $friend->id);
+
+            foreach ($friend->users()->get() as $user) {
+                if($user->id !== $this->id) {
+                    array_push($userAndChannel, $user->username);
+                }
+            }
+
+            array_push($friendshipsAndChannels, $userAndChannel);
+
+            return $friendshipsAndChannels;
+        }
     }
 }

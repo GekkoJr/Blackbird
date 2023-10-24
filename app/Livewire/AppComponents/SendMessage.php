@@ -30,10 +30,13 @@ class SendMessage extends Component
 
     public function sendMessage()
     {
+        $from = Auth::user()->username;
         if ($this->channel == 'global') {
-            $from = Auth::user()->username;
+
             // sends chat via chatcontroller
             app('App\Http\Controllers\ChatController')->globalChat($this->message, $from);
+        } else {
+            app('App\Http\Controllers\ChatController')->privateChat($this->message, $from, $this->channel);
         }
 
         $this->message = '';

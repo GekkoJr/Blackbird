@@ -9,5 +9,9 @@
         <span class="material-symbols-outlined">Public</span>
         <p>Global</p> <!-- add icon -->
     </button>
-
+    @foreach($friendsAndGroups as $item)
+        <div wire:click="swapChannel( <?php echo $item[0]; ?> )">
+            <p>{{ $item[1] }}</p>
+        </div>
+    @endforeach
 </div>

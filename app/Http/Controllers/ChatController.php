@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\GlobalMessages;
 use App\Events\Message;
 use App\Models\GlobalMessage;
 
@@ -16,6 +17,16 @@ class ChatController extends Controller
             $globalMessage->save();
 
             event(new Message($message, $from, $globalMessage->created_at));
+        }
+
+    }
+
+    public function privateChat($message, $from, $channel)
+    {
+        if ($message !== '') {
+            $time = time();
+
+            event(new GlobalMessages($message, $from, $time, $channel));
         }
 
     }

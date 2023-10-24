@@ -23,7 +23,11 @@ Route::get('/app', \App\Livewire\App::class)
     ->name('home')
     ->middleware('auth');
 
-Route::view('/', 'welcome');
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'loggedIn' => \Illuminate\Support\Facades\Auth::check(),
+    ]);
+});
 
 // not needed but nice to have (should probably be in api)
 Route::controller(AuthController::class)->group(function () {

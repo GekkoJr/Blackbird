@@ -66,4 +66,25 @@ class User extends Authenticatable
 
         return $users;
     }
+
+    public function getPendingFriendshipsUsers()
+    {
+        $friendships = [];
+
+        foreach ($this->friendships as $friend) {
+            $toAdd = [];
+
+            if($friend->pending) {
+                $users = [];
+                // TODO: Do something
+                foreach ($friend->users()->get() as $toAdd ) {
+                    array_push($users , $toAdd->username);
+                }
+                array_push($users, $friend->pending);
+                array_push($friendships, $users);
+            }
+        }
+
+        return $friendships;
+    }
 }

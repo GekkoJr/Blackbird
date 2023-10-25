@@ -25,6 +25,9 @@ const form = useForm({
                 <div v-if="form.errors.password" class="error">
                     <p>{{ form.errors.password }}</p>
                 </div>
+                <div v-if="form.errors.error" class="error">
+                    <p>{{ form.errors.error }}</p>
+                </div>
                 <button type="submit" :disabled="form.processing">Login</button>
                 <p>Are you new? <Link href="/signup" class="link">click here</Link></p>
             </form>

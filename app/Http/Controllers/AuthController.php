@@ -36,11 +36,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-            return redirect(route('home'));
+            return to_route('home');
         }
 
         return back()->withErrors([
-            'email' => 'your email or password is incorecct',
+            'error' => 'your email or password is incorecct',
         ]);
     }
 }

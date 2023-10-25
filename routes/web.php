@@ -34,7 +34,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/createUser', 'createUser')
         ->name('createUser');
 
-    Route::post('/loginUser', 'loginUser')
+    Route::post('/loginUser', 'login')
         ->name('loginUser');
 });
 
@@ -44,3 +44,11 @@ Route::get('/test', function () {
         'frameworks' => ['vue', 'laravel', 'inertia']
     ]);
 } );
+
+Route::get('/login', function () {
+    return Inertia::render('Login/Login');
+})->middleware('loginCheck');
+
+Route::get('/signup', function () {
+   return Inertia::render('Login/Signup');
+})->middleware('loginCheck');

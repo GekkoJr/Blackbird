@@ -1,14 +1,14 @@
 <script setup>
-defineProps({
-    loggedIn: Boolean,
-})
+
 </script>
 
 <template>
     <header>
-            <a class="headerLink" href="/home"><span class="headerFunColor">//</span>Blackbird</a>
-            <a class="headerLink" href="/app" v-if="loggedIn">Chat</a>
-            <a class="headerLink" href="/login" v-else>Login</a>
+        <a class="headerLink" href="/"><span class="headerFunColor">//</span>Blackbird</a>
+        <a class="headerLink">DROP DOWN</a>
+        <div v-if="dropdown">
+
+        </div>
     </header>
 </template>
 
@@ -43,5 +43,4 @@ header {
 .headerFunColor {
     color: $green;
 }
-
 </style>

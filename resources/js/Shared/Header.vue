@@ -6,15 +6,14 @@ defineProps({
 
 <template>
     <header>
-        <nav>
-            <a href="/home"><span>//</span>Blackbird</a>
-            <a href="/app" v-if="loggedIn">Chat</a>
-            <a href="/login" v-else>Login</a>
-        </nav>
+            <a class="headerLink" href="/home"><span class="headerFunColor">//</span>Blackbird</a>
+            <a class="headerLink" href="/app" v-if="loggedIn">Chat</a>
+            <a class="headerLink" href="/login" v-else>Login</a>
     </header>
 </template>
 
 <style scoped lang="scss">
+@import "../../css/theme";
 header {
     display: flex;
     justify-content: space-between;
@@ -24,7 +23,8 @@ header {
     a {
         z-index: 3;
         display: block;
-        padding: 0 20px;
+        padding: 12px 20px;
+        font-size: 1.5em;
     }
 
     :nth-child(2) {

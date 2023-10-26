@@ -27,9 +27,17 @@ Route::get('/signup', function () {
 })->middleware('loginCheck');
 
 Route::get('/app', function () {
-    return Inertia::render('App');
+    return Inertia::render('App', [
+        'chatting' => false
+    ]);
 })->name('home')->middleware('auth');
 
+Route::get('/app/global', function () {
+   return Inertia::render('App', [
+       'chatting' => true,
+       'channel'  => 'global',
+    ]);
+});
 
 // Routes related to Auth
 Route::controller(AuthController::class)->group(function () {

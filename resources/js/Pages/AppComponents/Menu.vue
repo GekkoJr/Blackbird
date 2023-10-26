@@ -1,10 +1,14 @@
 <script setup>
+import { Link } from "@inertiajs/vue3";
+
 
 </script>
 
 <template>
     <div class="mainMenu">
-
+        <div class="filler30px"></div>
+        <Link as="button" href="/app"><span class="material-symbols-outlined">diversity_3</span><p>Friends</p></Link>
+        <Link as="button" href="/app/global"><span class="material-symbols-outlined">public</span><p>Global Chat</p></Link>
     </div>
 </template>
 

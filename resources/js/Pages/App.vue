@@ -2,9 +2,10 @@
 import AppLayout from "../Shared/layouts/AppLayout.vue";
 import Menu from "./AppComponents/Menu.vue";
 import Friends from "./AppComponents/Friends.vue";
+import Chat from "./AppComponents/Chat.vue";
 
 defineProps({
-    friends: Object,
+    chatting: Boolean,
 })
 </script>
 
@@ -12,7 +13,8 @@ defineProps({
     <AppLayout>
         <div class="layout">
             <Menu />
-            <Friends />
+            <Chat v-if="chatting"/>
+            <Friends v-else />
         </div>
     </AppLayout>
 </template>

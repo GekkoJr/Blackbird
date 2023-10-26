@@ -47,3 +47,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/loginUser', 'login')
         ->name('loginUser');
 });
+
+// Routes for chatting
+Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
+    Route::post('/message/send', 'sendMessage');
+});

@@ -12,7 +12,7 @@ const form = useForm({
 
 window.Echo.private(`ws.${props.channel}`)
     .listen('Message', (e) => {
-      console.log(e)
+        console.log(e)
     })
 
 form.channel = props.channel
@@ -24,7 +24,7 @@ form.channel = props.channel
         <div class="reciveMessage">
         </div>
         <div class="sendMessage">
-            <form @submit.prevent="form.post('/api/send')">
+            <form @submit.prevent="form.post('/message/send')">
                 <input type="text" v-model="form.message">
                 <button><span class="material-symbols-outlined">send</span></button>
             </form>
@@ -39,7 +39,7 @@ form.channel = props.channel
     grid-auto-rows: auto 50px;
 }
 
-.sendMessage form{
+.sendMessage form {
     width: 100%;
     gap: 10px;
     display: grid;

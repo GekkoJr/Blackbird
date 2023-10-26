@@ -3,6 +3,7 @@ import {useForm} from '@inertiajs/vue3'
 
 const props = defineProps({
     channel: String,
+    messages: Object,
 })
 
 const form = useForm({
@@ -13,6 +14,7 @@ const form = useForm({
 window.Echo.private(`ws.${props.channel}`)
     .listen('Message', (e) => {
         console.log(e)
+        props.messages.append(e)
     })
 
 form.channel = props.channel
@@ -22,6 +24,7 @@ form.channel = props.channel
 <template>
     <div class="sendAndReciveContainer">
         <div class="reciveMessage">
+            <p v-for="message of props.messages" v-text="message"></p>
         </div>
         <div class="sendMessage">
             <form @submit.prevent="form.post('/message/send')">

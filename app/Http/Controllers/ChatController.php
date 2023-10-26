@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\Messages;
+use App\Events\Message;
 use App\Events\Message;
 use App\Models\GlobalMessage;
 use Illuminate\Http\Request;
@@ -40,7 +40,7 @@ class ChatController extends Controller
         if ($message !== '') {
             $time = time();
 
-            event(new Messages($message, $from, $time, $channel));
+            event(new Message($message, $from, $time, $channel));
         }
 
     }

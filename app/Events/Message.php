@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Messages
+class Message
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -44,12 +44,8 @@ class Messages
     public function broadcastOn(): array
     {
         return [
-            new Channel($this->channel)
+            new PrivateChannel('ws' . $this->channel)
         ];
     }
 
-    public function broadcastAs()
-    {
-        return 'Message';
-    }
 }

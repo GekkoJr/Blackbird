@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/login', function () {
     return Inertia::render('Login/Login');
-})->middleware('loginCheck');
+})->middleware('loginCheck')->name('login');
 
 Route::get('/signup', function () {
    return Inertia::render('Login/Signup');

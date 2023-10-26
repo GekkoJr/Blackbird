@@ -14,8 +14,8 @@ defineProps({
     <AppLayout>
         <div class="layout">
             <Menu />
-            <Chat :channel="channel" v-if="chatting"/>
-            <Friends v-else />
+            <Chat class="mainView" :channel="channel" v-if="chatting"/>
+            <Friends class="mainView" v-else />
         </div>
     </AppLayout>
 </template>
@@ -32,6 +32,16 @@ defineProps({
 
     :nth-child(2) {
         flex: 12;
+    }
+}
+
+.mainView {
+    // needed for it to start at the same line as menu
+    margin-top: 40px;
+    padding: 0 10px;
+
+    p {
+        margin: 0;
     }
 }
 </style>

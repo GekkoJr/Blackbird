@@ -6,6 +6,7 @@ import Chat from "./AppComponents/Chat.vue";
 
 defineProps({
     chatting: Boolean,
+    channel: String,
 })
 </script>
 
@@ -13,7 +14,7 @@ defineProps({
     <AppLayout>
         <div class="layout">
             <Menu />
-            <Chat v-if="chatting"/>
+            <Chat :channel="channel" v-if="chatting"/>
             <Friends v-else />
         </div>
     </AppLayout>

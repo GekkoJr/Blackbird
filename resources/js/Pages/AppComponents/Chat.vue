@@ -10,7 +10,7 @@ const form = useForm({
     channel: String,
 })
 
-window.Echo.private('ws.' + props.channel)
+window.Echo.private(`ws.${props.channel}`)
     .listen('Message', (e) => {
       console.log(e)
     })

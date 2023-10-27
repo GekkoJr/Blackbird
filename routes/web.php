@@ -36,6 +36,7 @@ Route::get('/app/global', function () {
    return Inertia::render('App', [
        'chatting' => true,
        'channel'  => 'global',
+       'messages' => \App\Models\Message::latest()->where('channel', 'global')->paginate(30)->toJson()
     ]);
 });
 

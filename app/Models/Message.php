@@ -9,10 +9,12 @@ class Message extends Model
 {
     use HasFactory;
 
-    public $table = 'global_messages';
+    public $table = 'messages';
 
     protected $fillable = [
         'message',
         'fromUser',
+        'channel',
+        'created_at',
     ];
 }

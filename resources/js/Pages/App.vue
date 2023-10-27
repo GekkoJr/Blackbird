@@ -4,17 +4,23 @@ import Menu from "./AppComponents/Menu.vue";
 import Friends from "./AppComponents/Friends.vue";
 import Chat from "./AppComponents/Chat.vue";
 
-defineProps({
+const props = defineProps({
     chatting: Boolean,
     channel: String,
+    messages: String,
 })
+
+
+let objectMessages = JSON.parse(props.messages)
+
+
 </script>
 
 <template>
     <AppLayout>
         <div class="layout">
             <Menu />
-            <Chat class="mainView" :channel="channel" v-if="chatting"/>
+            <Chat class="mainView" :channel="channel" :messages="objectMessages" v-if="chatting"/>
             <Friends class="mainView" v-else />
         </div>
     </AppLayout>

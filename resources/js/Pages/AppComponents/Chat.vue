@@ -12,9 +12,9 @@ const form = useForm({
 })
 
 window.Echo.private(`ws.${props.channel}`)
-    .listen('Message', (e) => {
+    .listen('SendMessage', (e) => {
         console.log(e)
-        props.messages.append(e)
+        props.messages.data.push(e)
     })
 
 form.channel = props.channel
@@ -24,7 +24,11 @@ form.channel = props.channel
 <template>
     <div class="sendAndReciveContainer">
         <div class="reciveMessage">
-            <p v-for="message of props.messages" v-text="message"></p>
+            <div v-for="message of props.messages.data" :key="message.id">
+                <p v-text="message.fromUser"></p>
+                <p v-text="message.message"></p>
+            </div>
+
         </div>
         <div class="sendMessage">
             <form @submit.prevent="form.post('/message/send')">

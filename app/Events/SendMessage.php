@@ -10,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class Message implements ShouldBroadcast
+class SendMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,20 +20,23 @@ class Message implements ShouldBroadcast
 
     public string $message;
 
-    public string $from;
+    public string $fromUser;
 
     public string $channel;
+
+    public $id;
 
     // time
     public $created_at;
 
-    public function __construct($message, $from, $time, $channel)
+    public function __construct($message, $from, $time, $channel, $id)
     {
         //
         $this->message = $message;
         $this->created_at = $time;
-        $this->from = $from;
+        $this->fromUser = $from;
         $this->channel = $channel;
+        $this->id = $id;
     }
 
     /**

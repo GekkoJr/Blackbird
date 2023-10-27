@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     // these should maybe be in a controller, but they are related to getting date, so it's ok ish
-    public function getOtherUsersIdFromFriends()
+    public function getOtherUsersFromFriends()
     {
         $users = [];
 
@@ -60,7 +60,7 @@ class User extends Authenticatable
 
             foreach ($toAdd as $user){
                 if($this->id !== $user->id)
-                array_push($users, $user->id);
+                array_push($users, $user);
             }
 
         }

@@ -1,11 +1,29 @@
 <script setup>
 import { ref } from 'vue'
+import { Link } from "@inertiajs/vue3";
+import {all} from "axios";
 
 let menuPage = ref(1)
+let allFriends = []
+let pending = []
+let userInfo = {}
 
-let allFriends = window.axios.get('/user/friends')
+window.axios.get('/user/friends')
+    .then(function (response) {
+        allFriends = response.data
+    })
 
-console.log(allFriends)
+window.axios.get('/user/pending')
+    .then(function (response) {
+        pending = response.data
+        console.log(pending)
+    })
+
+window.axios.get('/user/info')
+    .then(function (response) {
+        userInfo = response.data
+        console.log(userInfo)
+    })
 
 </script>
 
@@ -16,15 +34,24 @@ console.log(allFriends)
             <button @click="menuPage = 2">Add</button>
             <button @click="menuPage = 3">Pending</button>
         </div>
-        {{ menuPage }}
         <div v-show="menuPage === 1">
-            Aaaa
+            <div v-for="friend in allFriends">
+                <div>
+                    <p v-text="friend[1]"></p>
+                    <Link :href="'/app/channel/' + friend[0]" as="button" class="material-symbols-outlined">message</Link>
+                </div>
+            </div>
         </div>
         <div v-show="menuPage === 2">
             bbbbb
         </div>
         <div v-show="menuPage === 3">
-            cccc
+            <div v-for="friend in pending">
+                <p v-if="friend[0] !== userInfo.username" v-text="friend[0]"></p>
+                <p v-else v-text="friend[1]"></p>
+                <p v-if="friend[2] === userInfo.id">waiting for answer</p>
+                <button v-else class="material-symbols-outlined">check</button>
+            </div>
         </div>
     </div>
 </template>

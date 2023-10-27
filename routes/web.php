@@ -57,4 +57,11 @@ Route::controller(\App\Http\Controllers\ChatController::class)->group(function (
 });
 
 // routes for friendships / groups
-Route::controller('')
+Route::controller('App\Http\Controllers\FriendshipController')->group(function () {
+   Route::get('/user/friends', 'allFriends');
+   Route::get('/user/pending', 'getPending');
+});
+
+Route::get('/user/info', function () {
+    return \Illuminate\Support\Facades\Auth::user()->toJson();
+});

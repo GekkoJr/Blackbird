@@ -21,8 +21,8 @@ class FriendshipController extends Controller
             ]);
         }
 
-        foreach ($currentUser->getOtherUsersIdFromFriends() as $userId) {
-            if($currentUser->id === $userId) {
+        foreach ($currentUser->getOtherUsersFromFriends() as $userId) {
+            if($currentUser->id === $userId->id) {
                 return back()->withErrors([
                     'error' => 'Are you really that lonely'
                 ]);
@@ -44,5 +44,21 @@ class FriendshipController extends Controller
         return back()->with([
             'succes' => 'Friendrequest sendt',
         ]);
+    }
+
+    public function allFriends() {
+        if(!Auth::check()) {
+            return to_route('login');
+        }
+
+        return Auth::user()->getFriendshipsAndChannels();
+    }
+
+    public function getPending() {
+        if(!Auth::check()) {
+            return to_route('login');
+        }
+
+        return Auth::user()->getPendingFriendshipsUsers();
     }
 }

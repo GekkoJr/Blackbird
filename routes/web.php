@@ -60,6 +60,7 @@ Route::controller(\App\Http\Controllers\ChatController::class)->group(function (
 Route::controller('App\Http\Controllers\FriendshipController')->group(function () {
    Route::get('/user/friends', 'allFriends');
    Route::get('/user/pending', 'getPending');
+   Route::post('/user/add', 'addFriend');
 });
 
 Route::get('/user/info', function () {

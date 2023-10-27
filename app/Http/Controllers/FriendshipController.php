@@ -10,16 +10,18 @@ use Illuminate\Support\Facades\Auth;
 class FriendshipController extends Controller
 {
     //
-    public function addFriend($username)
+    public function addFriend(Request $request)
     {
-        $currentUser = Auth::user();
-        $userToAdd   = User::where('username', $username)->first();
-
-        if(!$userToAdd) {
+        if(!User::where('username', $request->username)->exists()) {
             return back()->withErrors([
-                'error' => 'User not found',
+                'error' => 'User not found'
             ]);
         }
+
+        $currentUser = Auth::user();
+        $userToAdd   = User::where('username', $request->username)->first();
+
+
 
         foreach ($currentUser->getOtherUsersFromFriends() as $userId) {
             if($currentUser->id === $userId->id) {
@@ -27,7 +29,7 @@ class FriendshipController extends Controller
                     'error' => 'Are you really that lonely'
                 ]);
             }
-            if($userId === $userToAdd->id) {
+            if($userId->id === $userToAdd->id) {
                 return back()->withErrors([
                     'error' => 'you are already friends'
                 ]);
@@ -41,8 +43,9 @@ class FriendshipController extends Controller
         $currentUser->friendships()->attach($friendship->id);
         $userToAdd->friendships()->attach($friendship->id);
 
-        return back()->with([
-            'succes' => 'Friendrequest sendt',
+        // not an error message but inertiajs makes handing over errors to easy
+        return back()->withErrors([
+            'success' => 'Friendrequest sendt',
         ]);
     }
 

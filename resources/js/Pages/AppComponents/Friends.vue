@@ -1,7 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 import { Link } from "@inertiajs/vue3";
-import {all} from "axios";
+import { useForm } from "@inertiajs/vue3";
+
+const searchForm = useForm({
+    username: null
+})
 
 let menuPage = ref(1)
 let allFriends = []
@@ -43,7 +47,15 @@ window.axios.get('/user/info')
             </div>
         </div>
         <div v-show="menuPage === 2">
-            bbbbb
+            <form @submit.prevent="searchForm.post('/user/add')">
+                <label>
+                    <span style="display: none">Add user here</span>
+                    <input type="text" v-model="searchForm.username" placeholder="Add user">
+                    <button type="submit" class="material-symbols-outlined">add</button>
+                </label>
+                <p class="error" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
+                <p class="error" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
+            </form>
         </div>
         <div v-show="menuPage === 3">
             <div v-for="friend in pending">

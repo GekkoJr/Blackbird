@@ -17,6 +17,7 @@ class SendMessage implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
+    public $id;
 
     public string $message;
 
@@ -24,16 +25,14 @@ class SendMessage implements ShouldBroadcast
 
     public string $channel;
 
-    public $id;
-
     // time
-    public $created_at;
+    public $created_at_unix;
 
     public function __construct($message, $from, $time, $channel, $id)
     {
         //
         $this->message = $message;
-        $this->created_at = $time;
+        $this->created_at_unix = $time;
         $this->fromUser = $from;
         $this->channel = $channel;
         $this->id = $id;

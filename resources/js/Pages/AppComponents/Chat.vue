@@ -1,5 +1,6 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
+import { reactive } from "vue"
 
 const props = defineProps({
     channel: String,
@@ -11,11 +12,19 @@ const form = useForm({
     channel: null,
 })
 
+const messageData = reactive(props.messages.data)
+
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
         console.log(e)
-        props.messages.data.push(e)
+        messageData.push(e)
+
     })
+
+function displayDate(unix) {
+    let date = new Date(unix * 1000)
+    return date
+}
 
 form.channel = props.channel
 
@@ -24,9 +33,12 @@ form.channel = props.channel
 <template>
     <div class="sendAndReciveContainer">
         <div class="reciveMessage">
-            <div v-for="message of props.messages.data" :key="message.id">
-                <p v-text="message.fromUser"></p>
-                <p v-text="message.message"></p>
+            <div v-for="message of messageData" :key="message.id">
+                <div class="nameAndTime">
+                    <p v-text="message.fromUser"></p>
+                    <p v-text="displayDate(message.created_at_unix)"></p>
+                </div>
+                <p class="message" v-text="message.message"></p>
             </div>
 
         </div>
@@ -102,5 +114,14 @@ form.channel = props.channel
         font-size: 0.7em;
         color: $surface2;
     }
+}
+
+.message {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.message:last-of-type {
+    margin-bottom: 20px;
 }
 </style>

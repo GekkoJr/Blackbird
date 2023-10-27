@@ -2,7 +2,7 @@
 
 namespace App\Livewire\AppComponents;
 
-use App\Models\GlobalMessage;
+use App\Models\Message;
 use Carbon\Carbon;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -33,7 +33,7 @@ class ReciveMessage extends Component
         if ($this->channel !== 'placeholder') {
             if ($this->channel == 'global') {
                 // loads the messages (since it is global no need to find spesific channel)
-                $this->messages = GlobalMessage::latest('created_at')->take(20)->get()->reverse()->toArray();
+                $this->messages = Message::latest('created_at')->take(20)->get()->reverse()->toArray();
                 $this->dateFixer();
             }
         }

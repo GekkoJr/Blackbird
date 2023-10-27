@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\Message;
-use App\Models\GlobalMessage;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +13,7 @@ class ChatController extends Controller
     public function globalChat($message, $from)
     {
         if ($message !== '') {
-            $globalMessage = new GlobalMessage;
+            $globalMessage = new Message;
             $globalMessage->message = $message;
             $globalMessage->fromUser = $from;
             $globalMessage->save();

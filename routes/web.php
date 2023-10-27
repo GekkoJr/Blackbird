@@ -28,7 +28,9 @@ Route::get('/signup', function () {
 
 Route::get('/app', function () {
     return Inertia::render('App', [
-        'chatting' => false
+        'chatting' => false,
+        // this is a temporary fix
+        'messages' => \App\Models\Message::latest()->where('channel', 'global')->take(1)->get()->toJson()
     ]);
 })->name('home')->middleware('auth');
 
@@ -53,3 +55,6 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
     Route::post('/message/send', 'sendMessage');
 });
+
+// routes for friendships / groups
+Route::controller('')

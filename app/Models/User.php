@@ -58,9 +58,9 @@ class User extends Authenticatable
         foreach ($this->friendships as $friend) {
             $toAdd = $friend->users()->get();
 
-            foreach ($toAdd as $user){
-                if($this->id !== $user->id)
-                array_push($users, $user);
+            foreach ($toAdd as $user) {
+                if ($this->id !== $user->id)
+                    array_push($users, $user);
             }
 
         }
@@ -75,13 +75,14 @@ class User extends Authenticatable
         foreach ($this->friendships as $friend) {
             $toAdd = [];
 
-            if($friend->pending) {
+            if ($friend->pending) {
                 $users = [];
-                // TODO: Do something
-                foreach ($friend->users()->get() as $toAdd ) {
-                    array_push($users , $toAdd->username);
+
+                foreach ($friend->users()->get() as $toAdd) {
+                    array_push($users, $toAdd->username);
                 }
                 array_push($users, $friend->pending);
+                array_push($users, $friend->id);
                 array_push($friendships, $users);
             }
         }
@@ -94,20 +95,20 @@ class User extends Authenticatable
         $friendshipsAndChannels = [];
 
         foreach ($this->friendships as $friend) {
-            $userAndChannel = [];
+            if ($friend->pending == null) {
+                $userAndChannel = [];
+                // channel id
+                array_push($userAndChannel, $friend->id);
 
-            // channel id
-            array_push($userAndChannel, $friend->id);
-
-            foreach ($friend->users()->get() as $user) {
-                if($user->id !== $this->id) {
-                    array_push($userAndChannel, $user->username);
+                foreach ($friend->users()->get() as $user) {
+                    if ($user->id !== $this->id) {
+                        array_push($userAndChannel, $user->username);
+                    }
                 }
+                array_push($friendshipsAndChannels, $userAndChannel);
             }
 
-            array_push($friendshipsAndChannels, $userAndChannel);
-
-            return $friendshipsAndChannels;
         }
+        return $friendshipsAndChannels;
     }
 }

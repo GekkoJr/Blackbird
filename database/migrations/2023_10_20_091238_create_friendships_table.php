@@ -14,7 +14,7 @@ return new class extends Migration
         // this table stores frinds and maybe groups in the future
         Schema::create('friendships', function (Blueprint $table) {
             $table->id();
-            $table->string('pending');
+            $table->string('pending')->nullable();
             $table->boolean('group')->default(false);
             $table->string('name')->nullable();
             $table->timestamps();

@@ -66,4 +66,34 @@ class FriendshipController extends Controller
 
         return Auth::user()->getPendingFriendshipsUsers();
     }
+
+    public function acceptFriend(Request $request)
+    {
+        $friendshipId = $request->user;
+        $canAdd = false;
+
+        $friendship = Friendship::find($friendshipId);
+
+        if ($friendship->pending === Auth::user()->id) {
+            return back()->withErrors([
+                'accept' => 'You sent the request'
+            ]);
+        }
+
+        foreach ($friendship->users as $user) {
+            if ($user->id === Auth::id()) {
+                $canAdd = true;
+            }
+        }
+
+        if ($canAdd) {
+            $friendship->pending = null;
+            $friendship->save();
+            return to_route('home');
+        }
+
+        return back()->withErrors([
+            'accept' => 'You are not authorized to do this'
+        ]);
+    }
 }

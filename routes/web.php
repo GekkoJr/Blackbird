@@ -61,6 +61,7 @@ Route::controller('App\Http\Controllers\FriendshipController')->group(function (
    Route::get('/user/friends', 'allFriends');
    Route::get('/user/pending', 'getPending');
    Route::post('/user/add', 'addFriend');
+   Route::post('/user/accept', 'acceptFriend');
 });
 
 Route::get('/user/info', function () {

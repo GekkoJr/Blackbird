@@ -10,7 +10,6 @@ const props = defineProps({
     messages: String,
 })
 
-
 let objectMessages = JSON.parse(props.messages)
 
 
@@ -20,7 +19,7 @@ let objectMessages = JSON.parse(props.messages)
     <AppLayout>
         <div class="layout">
             <Menu />
-            <Chat class="mainView" :channel="channel" :messages="objectMessages" v-if="chatting"/>
+            <Chat  class="mainView" :channel="channel" :messages="objectMessages" v-if="chatting"/>
             <Friends class="mainView" v-else />
         </div>
     </AppLayout>

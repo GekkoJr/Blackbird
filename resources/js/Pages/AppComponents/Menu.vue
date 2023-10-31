@@ -1,6 +1,16 @@
 <script setup>
 import { Link } from "@inertiajs/vue3";
+import { reactive } from "vue";
 
+let Friends = []
+
+window.axios.get('/user/friends')
+    .then(function (response) {
+        Friends = response.data
+        console.log(Friends)
+    })
+
+const allFriends = reactive(Friends)
 
 </script>
 
@@ -10,6 +20,7 @@ import { Link } from "@inertiajs/vue3";
         <Link as="button" href="/app"><span class="material-symbols-outlined">diversity_3</span><p>Friends</p></Link>
         <Link as="button" href="/app/global"><span class="material-symbols-outlined">public</span><p>Global Chat</p></Link>
     </div>
+    <Link v-for="friend in allFriends" :key="friend[0]" :href="'/app/channel/' + friend[0]" v-text="friend[1]"></Link>
 </template>
 
 <style scoped lang="scss">

@@ -108,6 +108,7 @@ form.channel = props.channel
 
     :nth-child(1) {
         font-size: 1em;
+        color: $lavender;
     }
 
     :nth-child(2) {

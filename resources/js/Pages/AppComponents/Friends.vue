@@ -110,6 +110,7 @@ function confirmUser(id) {
 .menu {
     display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 
     button {
         background-color: $surface0;
@@ -153,6 +154,4 @@ function confirmUser(id) {
         }
     }
 }
-
-
 </style>

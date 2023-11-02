@@ -3,7 +3,7 @@ A fast-ish chat app with a global chat and friends and in the future servers and
 
 ### Buildt with 
 - laravel
-- livewire
+- VueJs
 - laravel echo
 - soketi (websockets server)
 

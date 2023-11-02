@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,22 +14,67 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function () {
+    return Inertia::render('Welcome');
+});
 
-Route::get('/login', \App\Livewire\LoginAndSignup::class)
-    ->name('login')
-    ->middleware('loginCheck');
+Route::get('/login', function () {
+    return Inertia::render('Login/Login');
+})->middleware('loginCheck')->name('login');
 
-Route::get('/app', \App\Livewire\App::class)
-    ->name('home')
-    ->middleware('auth');
+Route::get('/signup', function () {
+    return Inertia::render('Login/Signup');
+})->middleware('loginCheck');
 
-Route::view('/', 'welcome');
+Route::get('/app', function () {
+    return Inertia::render('App', [
+        'chatting' => false,
+        'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
+        // this is a temporary fix as the page dont like it not being defined
+        'messages' => \App\Models\Message::latest()->where('channel', 'global')->take(1)->get()->toJson()
+    ]);
+})->name('home')->middleware('auth');
 
-// not needed but nice to have (should probably be in api)
+Route::get('/app/global', function () {
+    return Inertia::render('App', [
+        'chatting' => true,
+        'channel' => 'global',
+        'messages' => \App\Models\Message::latest()->where('channel', 'global')->paginate(30)->toJson(),
+        'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
+    ]);
+});
+
+Route::get('/app/channel/{channel}', function (int $channel) {
+    return Inertia::render('App', [
+        'chatting' => true,
+        'channel'  => $channel,
+        'messages' => \App\Models\Message::latest()->where('channel', $channel)->paginate(30)->toJson(),
+        'friends'  => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
+    ]);
+});
+
+// Routes related to Auth
 Route::controller(AuthController::class)->group(function () {
     Route::post('/createUser', 'createUser')
         ->name('createUser');
 
-    Route::post('/loginUser', 'loginUser')
+    Route::post('/loginUser', 'login')
         ->name('loginUser');
+});
+
+// Routes for chatting
+Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
+    Route::post('/message/send', 'sendMessage');
+});
+
+// routes for friendships / groups
+Route::controller('App\Http\Controllers\FriendshipController')->group(function () {
+    Route::get('/user/friends', 'allFriends');
+    Route::get('/user/pending', 'getPending');
+    Route::post('/user/add', 'addFriend');
+    Route::post('/user/accept', 'acceptFriend');
+});
+
+Route::get('/user/info', function () {
+    return \Illuminate\Support\Facades\Auth::user()->toJson();
 });

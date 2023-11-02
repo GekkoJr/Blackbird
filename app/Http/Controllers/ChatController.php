@@ -2,32 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\GlobalMessages;
-use App\Events\Message;
-use App\Models\GlobalMessage;
+use App\Events\SendMessage;
+use App\Models\Message;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ChatController extends Controller
 {
-    public function globalChat($message, $from)
+    public function sendMessage(Request $request)
     {
-        if ($message !== '') {
-            $globalMessage = new GlobalMessage;
-            $globalMessage->message = $message;
-            $globalMessage->fromUser = $from;
-            $globalMessage->save();
+        $request->validate([
+            'message' => 'required'
+        ]);
 
-            event(new Message($message, $from, $globalMessage->created_at));
-        }
+        $from = Auth::user()->username;
+        $createdAt = time();
 
-    }
+        $message = new Message;
+        $message->fromUser = $from;
+        $message->message = $request->message;
+        $message->created_at_unix = $createdAt;
+        $message->channel = $request->channel;
+        $message->save();
 
-    public function privateChat($message, $from, $channel)
-    {
-        if ($message !== '') {
-            $time = time();
+        SendMessage::dispatch($request->message, $from, $createdAt, $request->channel, $message->id);
 
-            event(new GlobalMessages($message, $from, $time, $channel));
-        }
 
     }
 }

@@ -13,19 +13,34 @@ class AuthController extends Controller
     public function createUser(Request $request)
     {
         $validated = $request->validate([
-            'email' => 'required|unique:user|email',
-            'username' => 'required|unique:user|alpha_num|between:3,50',
+            'email' => 'required|unique:users|email',
+            'username' => 'required|unique:users|alpha_num|between:3,50',
             'password' => 'required',
-            'display_name' => 'required',
+            'verify_password' => 'required',
         ]);
+
+        if($validated['verify_password'] !== $validated['password']) {
+            return back()->withErrors([
+                'error' => 'The passwords do not match',
+            ]);
+        }
 
         $user = new User;
         $user->username = $validated['username'];
         $user->password = Hash::make($validated['password']);
         $user->email = $validated['email'];
-        $user->display_name = $validated['display_name'];
         $user->save();
 
+        if(Auth::attempt([
+            'email' => $user->email,
+            'password' => $validated['password']
+        ])) {
+            return to_route('home');
+        }
+
+        return back()->withErrors([
+            'error' => 'something went wrong'
+            ]);
     }
 
     public function login(Request $request)
@@ -36,11 +51,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($validated)) {
-            return redirect(route('home'));
+            return to_route('home');
         }
 
         return back()->withErrors([
-            'email' => 'your email or password is incorecct',
+            'error' => 'your email or password is incorecct',
         ]);
     }
 }

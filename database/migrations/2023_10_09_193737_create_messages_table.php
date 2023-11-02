@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // this table stores frinds and maybe groups in the future
-        Schema::create('friendships', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('pending')->nullable();
-            $table->boolean('group')->default(false);
-            $table->string('name')->nullable();
+            $table->string('message');
+            $table->string('fromUser');
+            $table->string('channel');
+            $table->string('created_at_unix');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('friendships');
+        Schema::dropIfExists('messages');
     }
 };

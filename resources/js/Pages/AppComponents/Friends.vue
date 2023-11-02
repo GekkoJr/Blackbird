@@ -41,7 +41,7 @@ function confirmUser(id) {
 
 <template>
     <div class="container">
-        <div>
+        <div class="menu">
             <button @click="menuPage = 1">All</button>
             <button @click="menuPage = 2">Add</button>
             <button @click="menuPage = 3">Pending</button>
@@ -59,9 +59,8 @@ function confirmUser(id) {
             </div>
         </div>
         <div v-show="menuPage === 2">
-            <form @submit.prevent="searchForm.post('/user/add')">
+            <form class="addUser" @submit.prevent="searchForm.post('/user/add')">
                 <label>
-                    <span style="display: none">Add user here</span>
                     <input type="text" v-model="searchForm.username" placeholder="Add user">
                     <button type="submit" class="material-symbols-outlined">add</button>
                 </label>
@@ -75,7 +74,8 @@ function confirmUser(id) {
                     <p v-if="friend[0] !== userInfo.username" v-text="friend[0]"></p>
                     <p v-else v-text="friend[1]"></p>
                     <p v-if="parseInt(friend[2]) === userInfo.id">waiting for answer</p>
-                    <button @click="confirmUser(parseInt(friend[3]))" v-else class="material-symbols-outlined">check</button>
+                    <button @click="confirmUser(parseInt(friend[3]))" v-else class="material-symbols-outlined">check
+                    </button>
                 </div>
             </div>
             <div v-else>
@@ -103,6 +103,53 @@ function confirmUser(id) {
             width: 45px;
             height: 45px;
             border-radius: 100%;
+        }
+    }
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+
+    button {
+        background-color: $surface0;
+        color: $text;
+        width: fit-content;
+        border-radius: 6px;
+        padding: 5px 10px;
+        margin: 0 5px;
+        border: 1px solid $surface0;
+
+        &:hover {
+            color: $flamingo;
+            border: 1px solid $surface1;
+        }
+    }
+}
+
+.addUser {
+    display: flex;
+    align-items: center;
+
+    label {
+
+        input {
+            background-color: $surface0;
+            color: $text;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+        }
+
+        button {
+            background-color: $surface0;
+            color: $text;
+            border: none;
+            vertical-align: center;
+
+            &:hover {
+                color: $flamingo;
+            }
         }
     }
 }

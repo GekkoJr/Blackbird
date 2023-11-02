@@ -4,6 +4,10 @@ import {Link} from "@inertiajs/vue3";
 import {useForm} from "@inertiajs/vue3";
 import {all} from "axios";
 
+const props = defineProps({
+    friends: Array,
+})
+
 const searchForm = useForm({
     username: null
 })
@@ -12,15 +16,9 @@ const addUserForm = useForm({
     user: null,
 })
 
-
-let allFriends = []
 let pending = []
 let userInfo = {}
 
-window.axios.get('/user/friends')
-    .then(function (response) {
-        allFriends = response.data
-    })
 
 window.axios.get('/user/pending')
     .then(function (response) {
@@ -49,7 +47,7 @@ function confirmUser(id) {
             <button @click="menuPage = 3">Pending</button>
         </div>
         <div v-show="menuPage === 1">
-            <div v-if="allFriends.length !== 0" v-for="friend in allFriends" class="usersDisplay">
+            <div v-if="friends.length !== 0" v-for="friend in friends" class="usersDisplay">
                 <div>
                     <p v-text="friend[1]"></p>
                     <Link :href="'/app/channel/' + friend[0]" as="button" class="material-symbols-outlined">message

@@ -23,22 +23,33 @@ Route::get('/login', function () {
 })->middleware('loginCheck')->name('login');
 
 Route::get('/signup', function () {
-   return Inertia::render('Login/Signup');
+    return Inertia::render('Login/Signup');
 })->middleware('loginCheck');
 
 Route::get('/app', function () {
     return Inertia::render('App', [
         'chatting' => false,
-        // this is a temporary fix
+        'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
+        // this is a temporary fix as the page dont like it not being defined
         'messages' => \App\Models\Message::latest()->where('channel', 'global')->take(1)->get()->toJson()
     ]);
 })->name('home')->middleware('auth');
 
 Route::get('/app/global', function () {
-   return Inertia::render('App', [
-       'chatting' => true,
-       'channel'  => 'global',
-       'messages' => \App\Models\Message::latest()->where('channel', 'global')->paginate(30)->toJson()
+    return Inertia::render('App', [
+        'chatting' => true,
+        'channel' => 'global',
+        'messages' => \App\Models\Message::latest()->where('channel', 'global')->paginate(30)->toJson(),
+        'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
+    ]);
+});
+
+Route::get('/app/channel/{channel}', function (int $channel) {
+    return Inertia::render('App', [
+        'chatting' => true,
+        'channel'  => $channel,
+        'messages' => \App\Models\Message::latest()->where('channel', $channel)->paginate(30)->toJson(),
+        'friends'  => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
     ]);
 });
 
@@ -58,10 +69,10 @@ Route::controller(\App\Http\Controllers\ChatController::class)->group(function (
 
 // routes for friendships / groups
 Route::controller('App\Http\Controllers\FriendshipController')->group(function () {
-   Route::get('/user/friends', 'allFriends');
-   Route::get('/user/pending', 'getPending');
-   Route::post('/user/add', 'addFriend');
-   Route::post('/user/accept', 'acceptFriend');
+    Route::get('/user/friends', 'allFriends');
+    Route::get('/user/pending', 'getPending');
+    Route::post('/user/add', 'addFriend');
+    Route::post('/user/accept', 'acceptFriend');
 });
 
 Route::get('/user/info', function () {

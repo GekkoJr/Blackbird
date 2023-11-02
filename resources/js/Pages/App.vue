@@ -8,19 +8,20 @@ const props = defineProps({
     chatting: Boolean,
     channel: String,
     messages: String,
+    friends: Array,
 })
 
 let objectMessages = JSON.parse(props.messages)
 
-
+console.log(props.friends)
 </script>
 
 <template>
     <AppLayout>
         <div class="layout">
-            <Menu />
+            <Menu :friends="friends"/>
             <Chat  class="mainView" :channel="channel" :messages="objectMessages" v-if="chatting"/>
-            <Friends class="mainView" v-else />
+            <Friends :friends="friends" class="mainView" v-else />
         </div>
     </AppLayout>
 </template>

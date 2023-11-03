@@ -12,24 +12,22 @@ const form = useForm({
 })
 
 let skip = 0;
-let messages = [];
+const messages = ref([]);
 
 function getMessages() {
     let link = `/message/get/${props.channel}/${skip}`
     window.axios.get(link)
         .then(function (response) {
-            messages = response.data
+            console.log(response.data)
+            messages.value = response.data
             console.log(messages)
             console.log('messages recived from server')
         })
 }
 
-
-const messageData = reactive(messages)
-
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
-        messageData.push(e)
+        messages.value.push(e)
     })
 
 function displayDate(unix) {
@@ -67,7 +65,7 @@ onBeforeMount(() => {
 <template>
     <div class="sendAndReciveContainer">
         <div class="reciveMessage" id="chatBox">
-            <div v-for="message of messageData" :key="message.id">
+            <div v-for="message of messages" :key="message.id">
                 <div class="nameAndTime">
                     <p v-text="message.fromUser"></p>
                     <p v-text="displayDate(message.created_at_unix)"></p>

@@ -26,6 +26,11 @@ function displayDate(unix) {
     return date
 }
 
+function sendMessage(){
+    form.post('/message/send')
+    form.message = ''
+}
+
 form.channel = props.channel
 
 </script>
@@ -43,7 +48,7 @@ form.channel = props.channel
 
         </div>
         <div class="sendMessage">
-            <form @submit.prevent="form.post('/message/send')">
+            <form @submit.prevent="sendMessage">
                 <input type="text" v-model="form.message">
                 <button><span class="material-symbols-outlined">send</span></button>
             </form>

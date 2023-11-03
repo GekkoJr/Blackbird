@@ -1,6 +1,8 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
 import { reactive } from "vue"
+import { onMounted } from "vue"
+import { onUpdated } from "vue"
 
 const props = defineProps({
     channel: String,
@@ -16,9 +18,7 @@ const messageData = reactive(props.messages.data)
 
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
-        console.log(e)
         messageData.push(e)
-
     })
 
 function displayDate(unix) {
@@ -31,13 +31,27 @@ function sendMessage(){
     form.message = ''
 }
 
+function scrollToBottom() {
+    const container = document.getElementById('chatBox')
+    container.scrollTop = container.scrollHeight
+}
+
 form.channel = props.channel
+
+onMounted(() => {
+    console.log('Chat mounted succesfully')
+    scrollToBottom()
+})
+
+onUpdated(() => {
+    scrollToBottom()
+})
 
 </script>
 
 <template>
     <div class="sendAndReciveContainer">
-        <div class="reciveMessage">
+        <div class="reciveMessage" id="chatBox">
             <div v-for="message of messageData" :key="message.id">
                 <div class="nameAndTime">
                     <p v-text="message.fromUser"></p>

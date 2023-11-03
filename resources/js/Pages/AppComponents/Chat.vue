@@ -1,6 +1,6 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
-import {onUpdated, onMounted, reactive, ref,  onBeforeMount} from "vue"
+import {onUpdated, onMounted ref,  onBeforeMount} from "vue"
 
 const props = defineProps({
     channel: String,
@@ -19,7 +19,7 @@ function getMessages() {
     window.axios.get(link)
         .then(function (response) {
             console.log(response.data)
-            messages.value = response.data
+            messages.value = response.data.reverse()
             console.log(messages)
             console.log('messages recived from server')
         })
@@ -27,6 +27,7 @@ function getMessages() {
 
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
+        console.log(e)
         messages.value.push(e)
     })
 

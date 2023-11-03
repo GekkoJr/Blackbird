@@ -1,6 +1,6 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
-import {onUpdated, onMounted, ref,  onBeforeMount} from "vue"
+import {onUpdated, onMounted, ref, onBeforeMount, onBeforeUpdate} from "vue"
 
 const props = defineProps({
     channel: String,
@@ -12,17 +12,26 @@ const form = useForm({
 })
 
 let skip = 0;
+let ableToGet = true;
 const messages = ref([]);
+let firstScroll = true
+let newMessagesDB = false
+let lastScrollHeight = 0
 
 function getMessages() {
-    let link = `/message/get/${props.channel}/${skip}`
-    window.axios.get(link)
-        .then(function (response) {
-            console.log(response.data)
-            messages.value = response.data.reverse()
-            console.log(messages)
-            console.log('messages recived from server')
-        })
+    // yes its shit, but it hinders you from sending more than one request at a time
+    if (ableToGet) {
+        let link = `/message/get/${props.channel}/${skip}`
+        ableToGet = false
+        window.axios.get(link)
+            .then(function (response) {
+                messages.value = response.data.reverse().concat(messages.value)
+                skip = skip + 50
+                ableToGet = true
+                newMessagesDB = true
+            })
+    }
+
 }
 
 window.Echo.private(`ws.${props.channel}`)
@@ -46,14 +55,17 @@ function scrollToBottom() {
     container.scrollTop = container.scrollHeight
 }
 
+function handleScroll(e) {
+    if (e.target.scrollTop === 0) {
+        getMessages()
+    }
+}
+
 form.channel = props.channel
 
 onMounted(() => {
+    const chatBox = document.getElementById('chatBox');
     console.log('Chat mounted succesfully')
-    scrollToBottom()
-})
-
-onUpdated(() => {
     scrollToBottom()
 })
 
@@ -61,11 +73,31 @@ onBeforeMount(() => {
     getMessages()
 })
 
+onUpdated(() => {
+    if (newMessagesDB && !firstScroll) {
+        // moves the user to where they were
+        chatBox.scrollTop = chatBox.scrollHeight - lastScrollHeight
+        newMessagesDB = false
+    }
+    if (firstScroll) {
+        // only runs when the first messages appear
+        scrollToBottom()
+        firstScroll = false;
+    }
+
+})
+
+onBeforeUpdate(() => {
+    if (newMessagesDB) {
+        lastScrollHeight = chatBox.scrollHeight
+    }
+})
+
 </script>
 
 <template>
     <div class="sendAndReciveContainer">
-        <div class="reciveMessage" id="chatBox">
+        <div class="reciveMessage" id="chatBox" v-on:scroll="handleScroll">
             <div v-for="message of messages" :key="message.id">
                 <div class="nameAndTime">
                     <p v-text="message.fromUser"></p>

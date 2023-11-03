@@ -59,8 +59,8 @@ onUpdated(() => {
                 </div>
                 <p class="message" v-text="message.message"></p>
             </div>
-
         </div>
+
         <div class="sendMessage">
             <form @submit.prevent="sendMessage">
                 <input type="text" v-model="form.message">

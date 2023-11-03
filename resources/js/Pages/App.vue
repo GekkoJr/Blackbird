@@ -13,7 +13,6 @@ const props = defineProps({
 
 let objectMessages = JSON.parse(props.messages)
 
-console.log(props.friends)
 </script>
 
 <template>

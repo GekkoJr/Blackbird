@@ -1,8 +1,6 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
-import { reactive } from "vue"
-import { onMounted } from "vue"
-import { onUpdated } from "vue"
+import {onUpdated, onMounted, reactive, ref,  onBeforeMount} from "vue"
 
 const props = defineProps({
     channel: String,
@@ -13,7 +11,21 @@ const form = useForm({
     channel: null,
 })
 
-const messageData = reactive()
+let skip = 0;
+let messages = [];
+
+function getMessages() {
+    let link = `/message/get/${props.channel}/${skip}`
+    window.axios.get(link)
+        .then(function (response) {
+            messages = response.data
+            console.log(messages)
+            console.log('messages recived from server')
+        })
+}
+
+
+const messageData = reactive(messages)
 
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
@@ -25,7 +37,7 @@ function displayDate(unix) {
     return date
 }
 
-function sendMessage(){
+function sendMessage() {
     form.post('/message/send')
     form.message = ''
 }
@@ -44,6 +56,10 @@ onMounted(() => {
 
 onUpdated(() => {
     scrollToBottom()
+})
+
+onBeforeMount(() => {
+    getMessages()
 })
 
 </script>

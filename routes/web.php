@@ -63,6 +63,11 @@ Route::controller(\App\Http\Controllers\ChatController::class)->group(function (
     Route::post('/message/send', 'sendMessage');
 });
 
+// getting messages
+Route::get('/message/get/{channel}/{skip}', function(string $channel, int $skip) {
+    return \App\Models\Message::latest()->where('channel', $channel)->skip($skip)->take(50)->get()->toJson();
+});
+
 // routes for friendships / groups
 Route::controller('App\Http\Controllers\FriendshipController')->group(function () {
     Route::get('/user/friends', 'allFriends');

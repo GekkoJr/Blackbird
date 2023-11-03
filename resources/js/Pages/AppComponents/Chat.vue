@@ -1,6 +1,6 @@
 <script setup>
 import {useForm} from '@inertiajs/vue3'
-import {onUpdated, onMounted ref,  onBeforeMount} from "vue"
+import {onUpdated, onMounted, ref,  onBeforeMount} from "vue"
 
 const props = defineProps({
     channel: String,

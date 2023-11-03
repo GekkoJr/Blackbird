@@ -6,7 +6,6 @@ import { onUpdated } from "vue"
 
 const props = defineProps({
     channel: String,
-    messages: Object,
 })
 
 const form = useForm({
@@ -14,7 +13,7 @@ const form = useForm({
     channel: null,
 })
 
-const messageData = reactive(props.messages.data)
+const messageData = reactive()
 
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {

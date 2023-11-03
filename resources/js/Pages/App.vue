@@ -7,11 +7,8 @@ import Chat from "./AppComponents/Chat.vue";
 const props = defineProps({
     chatting: Boolean,
     channel: String,
-    messages: String,
     friends: Array,
 })
-
-let objectMessages = JSON.parse(props.messages)
 
 </script>
 
@@ -19,7 +16,7 @@ let objectMessages = JSON.parse(props.messages)
     <AppLayout>
         <div class="layout">
             <Menu :friends="friends"/>
-            <Chat  class="mainView" :channel="channel" :messages="objectMessages" v-if="chatting"/>
+            <Chat  class="mainView" :channel="channel" v-if="chatting"/>
             <Friends :friends="friends" class="mainView" v-else />
         </div>
     </AppLayout>

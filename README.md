@@ -30,7 +30,7 @@ soketi start
 To run Blackbird in production
 1. Follow steps 1-5 of dev setup
 2. use nginx or apache to host the files
-3. point the .htaccess file to public/index.pho
+3. point the .htaccess file to public/index.php
 4 run these commands
 ``` 
 soketi start

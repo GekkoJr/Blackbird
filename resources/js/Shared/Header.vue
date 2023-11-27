@@ -6,7 +6,7 @@ defineProps({
 
 <template>
     <header>
-            <a class="headerLink" href="/home"><span class="headerFunColor">//</span>Blackbird</a>
+            <a class="headerLink" href="/"><span class="headerFunColor">//</span>Blackbird</a>
             <a class="headerLink" href="/app" v-if="loggedIn">Chat</a>
             <a class="headerLink" href="/login" v-else>Login</a>
     </header>

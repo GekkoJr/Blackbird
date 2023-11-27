@@ -24,7 +24,12 @@ export default defineConfig({
                 additionalData: `@import "/resources/css/theme.scss";`,
             },
         },
-    }
+    },
+    server: {
+        hmr: {
+            host: 'localhost',
+        },
+    },
 })
 
 

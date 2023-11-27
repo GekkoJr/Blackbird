@@ -1,19 +1,17 @@
 <script setup>
-let dropdown = false
 </script>
 
 <template>
     <header>
-        <a class="headerLink" href="/"><span class="headerFunColor">//</span>Blackbird</a>
-        <a class="headerLink">DROP DOWN</a>
-        <div v-if="dropdown">
-
-        </div>
+        <nav>
+            <a class="headerLink" href="/"><span class="headerFunColor">//</span>Blackbird</a>
+            <a class="headerLink">Settings</a>
+        </nav>
     </header>
 </template>
 
 <style scoped lang="scss">
-header {
+header nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -42,5 +40,16 @@ header {
 
 .headerFunColor {
     color: $green;
+}
+
+.dropdown {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    background-color: $mantle;
+    z-index: 10;
+
 }
 </style>

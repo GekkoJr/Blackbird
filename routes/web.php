@@ -30,8 +30,6 @@ Route::get('/app', function () {
     return Inertia::render('App', [
         'chatting' => false,
         'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
-        // this is a temporary fix as the page dont like it not being defined
-        'messages' => \App\Models\Message::latest()->where('channel', 'global')->take(1)->get()->toJson()
     ]);
 })->name('home')->middleware('auth');
 
@@ -39,7 +37,6 @@ Route::get('/app/global', function () {
     return Inertia::render('App', [
         'chatting' => true,
         'channel' => 'global',
-        'messages' => \App\Models\Message::latest()->where('channel', 'global')->paginate(30)->toJson(),
         'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
     ]);
 });
@@ -48,7 +45,6 @@ Route::get('/app/channel/{channel}', function (int $channel) {
     return Inertia::render('App', [
         'chatting' => true,
         'channel'  => $channel,
-        'messages' => \App\Models\Message::latest()->where('channel', $channel)->paginate(30)->toJson(),
         'friends'  => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
     ]);
 });
@@ -65,6 +61,11 @@ Route::controller(AuthController::class)->group(function () {
 // Routes for chatting
 Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
     Route::post('/message/send', 'sendMessage');
+});
+
+// getting messages
+Route::get('/message/get/{channel}/{skip}', function(string $channel, int $skip) {
+    return \App\Models\Message::latest()->where('channel', $channel)->skip($skip)->take(50)->get()->toJson();
 });
 
 // routes for friendships / groups

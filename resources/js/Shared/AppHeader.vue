@@ -11,7 +11,7 @@
 </template>
 
 <style scoped lang="scss">
-header {
+header nav {
     display: flex;
     justify-content: space-between;
     width: 100%;

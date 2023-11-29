@@ -1,11 +1,15 @@
 <script setup>
+import {Link} from "@inertiajs/vue3"
 </script>
 
 <template>
     <header>
         <nav>
             <a class="headerLink" href="/"><span class="headerFunColor">//</span>Blackbird</a>
-            <a class="headerLink">Settings</a>
+            <div style="display: flex">
+                <Link href="/help" class="headerLink"><span class="material-symbols-outlined">help</span></Link>
+                <Link href="/user/settings" class="headerLink"><span class="material-symbols-outlined">settings</span></Link>
+            </div>
         </nav>
     </header>
 </template>

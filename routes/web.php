@@ -39,7 +39,7 @@ Route::get('/app/global', function () {
         'channel' => 'global',
         'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
     ]);
-});
+})->middleware("auth");
 
 Route::get('/app/channel/{channel}', function (int $channel) {
     return Inertia::render('App', [
@@ -74,8 +74,13 @@ Route::controller('App\Http\Controllers\FriendshipController')->group(function (
     Route::get('/user/pending', 'getPending');
     Route::post('/user/add', 'addFriend');
     Route::post('/user/accept', 'acceptFriend');
-});
+})->middleware("auth");
 
 Route::get('/user/info', function () {
     return \Illuminate\Support\Facades\Auth::user()->toJson();
 });
+
+//routes for User settings
+Route::controller(\App\Http\Controllers\SettingsController::class)->group(function () {
+    Route::get("/user/settings", "index");
+})->middleware("auth");

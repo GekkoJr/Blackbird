@@ -15,12 +15,16 @@ const props = defineProps({
 </template>
 
 <style scoped lang="scss">
-a {
+div {
+    padding: 10px;
+
+    ul li a {
     color: $blue;
 
     &:hover {
         color: $maroon;
         cursor: grab;
     }
+}
 }
 </style>

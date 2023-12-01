@@ -84,3 +84,12 @@ Route::get('/user/info', function () {
 Route::controller(\App\Http\Controllers\SettingsController::class)->group(function () {
     Route::get("/user/settings", "index");
 })->middleware("auth");
+
+// i know placing logic in routes is a big no no, but in this case i do it anyway
+Route::get("/help/{file}", function ($file) {
+     $path = resource_path() . '/help/'. $file . '.md';
+     if(!file_exists($path)) {abort(404);}
+     return Inertia::render("Help", [
+         "body" => file_get_contents($path)
+     ]);
+});

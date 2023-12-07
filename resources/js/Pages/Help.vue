@@ -17,14 +17,6 @@ const props = defineProps({
 <style scoped lang="scss">
 div {
     padding: 10px;
-
-    ul li a {
-    color: $blue;
-
-    &:hover {
-        color: $maroon;
-        cursor: grab;
-    }
 }
-}
+
 </style>

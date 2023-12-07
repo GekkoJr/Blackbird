@@ -15,13 +15,13 @@ const form = useForm({
             <form class="loginForm" @submit.prevent="form.post('/loginUser')">
                 <label>
                     <span>Email</span>
-                    <input type="email" v-model="form.email"></label>
+                    <input required type="email" v-model="form.email"></label>
                 <div v-if="form.errors.email" class="error">
                     <p>{{ form.errors.email }}</p>
                 </div>
                 <label>
                     <span>Password</span>
-                    <input type="password" v-model="form.password"></label>
+                    <input required type="password" v-model="form.password"></label>
                 <div v-if="form.errors.password" class="error">
                     <p>{{ form.errors.password }}</p>
                 </div>

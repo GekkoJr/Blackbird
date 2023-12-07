@@ -112,16 +112,15 @@ function confirmUser(id) {
 }
 
 .menu {
-    display: flex;
+    width: 600px;
     justify-content: center;
     margin-bottom: 15px;
 
     button {
         background-color: $surface0;
         color: $text;
-        width: fit-content;
         border-radius: 6px;
-        padding: 5px 10px;
+        padding: 5px 30px;
         margin: 0 5px;
         border: 1px solid $surface0;
 

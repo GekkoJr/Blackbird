@@ -60,4 +60,31 @@ class AuthController extends Controller
             'error' => 'your email or password is incorecct',
         ]);
     }
+
+    public function logout() {
+        Auth::logout();
+        session()->regenerate();
+        return to_route("login");
+    }
+
+    public function updatePassword(Request $request) {
+        $request->validate([
+            'password' => 'required',
+            'password_verify' => 'required'
+        ]);
+
+        // checks if the passwords match
+        if($request->password == $request->password_verify) {
+            User::find(Auth::id())->password = Hash::make($request->password);
+            session()->regenerate();
+            // yes it is bad, but in my defense it is really late
+            return back()->withErrors([
+                'error' => 'Password updated!'
+            ]);
+        }
+
+        return back()->withErrors([
+            'error' => 'Passwords do not match'
+        ]);
+    }
 }

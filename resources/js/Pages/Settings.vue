@@ -11,8 +11,10 @@ let page = ref(1);
     <AppLayout>
         <div class="layout">
             <div class="mainMenu">
-                <button @click="page = 1">Profile</button>
-                <button @click="page = 2">Account</button>
+                <div style="height: 10px"></div>
+                <button class="normal" @click="page = 1">Profile</button>
+                <button class="normal" @click="page = 2">Account</button>
+                <button class="logout" onclick="location.href = '/user/logout'">Log out</button>
             </div>
             <ProfileSettings v-if="page === 1"></ProfileSettings>
             <AccountSettings v-if="page === 2"></AccountSettings>
@@ -45,27 +47,26 @@ let page = ref(1);
         margin: auto auto 5px;
         border-radius: 6px;
         height: 35px;
-        padding: 7px 0;
+        padding: 7px 10px;
         display: flex;
         align-items: center;
         border: none;
         background-color: $base;
-
-        p {
-            color: $text;
-            font-size: 1.5em;
-            text-align: left;
-        }
-
-        span.material-symbols-outlined {
-            color: $text;
-            font-size: 27px;
-            margin: 0 5px;
-        }
+        font-size: 1em;
 
         &:hover {
             background-color: $surface0;
         }
+
+
     }
+}
+
+.logout {
+    color: $red;
+}
+
+.normal {
+    color: $text;
 }
 </style>

@@ -53,9 +53,10 @@ Route::get('/app/channel/{channel}', function (int $channel) {
 Route::controller(AuthController::class)->group(function () {
     Route::post('/createUser', 'createUser')
         ->name('createUser');
-
     Route::post('/loginUser', 'login')
         ->name('loginUser');
+    Route::get('/user/logout', 'logout');
+    Route::post('/user/update/password', 'updatePassword');
 });
 
 // Routes for chatting
@@ -85,7 +86,7 @@ Route::controller(\App\Http\Controllers\SettingsController::class)->group(functi
     Route::get("/user/settings", "index");
 })->middleware("auth");
 
-// i know placing logic in routes is a big no no, but in this case i do it anyway
+// I know placing logic in routes is a big no no, but in this case I do it anyway
 Route::get("/help/{file}", function ($file) {
      $path = resource_path() . '/help/'. $file . '.md';
      if(!file_exists($path)) {abort(404);}

@@ -37,6 +37,7 @@ function getMessages() {
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
         console.log(e)
+        skip++;
         messages.value.push(e)
     })
 

@@ -64,6 +64,7 @@ function confirmUser(id) {
                     <input type="text" v-model="searchForm.username" placeholder="Add user">
                     <button type="submit" class="material-symbols-outlined">add</button>
                 </label>
+
                 <p class="error" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
                 <p class="error" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
             </form>
@@ -129,10 +130,9 @@ function confirmUser(id) {
 }
 
 .addUser {
-    display: flex;
-    align-items: center;
 
     label {
+        vertical-align: middle;
 
         input {
             background-color: $surface0;
@@ -140,13 +140,16 @@ function confirmUser(id) {
             border: none;
             padding: 5px 10px;
             border-radius: 6px;
+            vertical-align: middle;
         }
 
         button {
             background-color: $surface0;
             color: $text;
             border: none;
-            vertical-align: center;
+            vertical-align: middle;
+            border-radius: 6px;
+            margin-left: 5px;
 
             &:hover {
                 color: $flamingo;

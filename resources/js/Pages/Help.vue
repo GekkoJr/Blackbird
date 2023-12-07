@@ -2,7 +2,7 @@
 import AppLayout from "../Shared/layouts/AppLayout.vue";
 import {marked} from "marked";
 
-const props = definePrphpops({
+const props = defineProps({
     body: null,
 })
 </script>

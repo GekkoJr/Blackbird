@@ -21,14 +21,15 @@ class FriendshipController extends Controller
         $currentUser = Auth::user();
         $userToAdd = User::where('username', $request->username)->first();
 
+        // checks if the user trys to add themselves
         if ($currentUser->id === $userToAdd->id) {
             return back()->withErrors([
                 'error' => 'Are you really that lonely'
             ]);
         }
 
+        // checks if they already are friends
         foreach ($currentUser->getOtherUsersFromFriends() as $user) {
-
             if ($user->id === $userToAdd->id) {
                 return back()->withErrors([
                     'error' => 'you are already friends'
@@ -49,15 +50,16 @@ class FriendshipController extends Controller
         ]);
     }
 
+    // gets the current users friends
     public function allFriends()
     {
         if (!Auth::check()) {
             return to_route('login');
         }
-
         return Auth::user()->getFriendshipsAndChannels();
     }
 
+    // gets pending friend requests
     public function getPending()
     {
         if (!Auth::check()) {
@@ -67,6 +69,7 @@ class FriendshipController extends Controller
         return Auth::user()->getPendingFriendshipsUsers();
     }
 
+    // accepts the friend
     public function acceptFriend(Request $request)
     {
         $friendshipId = $request->user;
@@ -74,12 +77,14 @@ class FriendshipController extends Controller
 
         $friendship = Friendship::find($friendshipId);
 
+        // checks if you are trying to approve a friendship you asked for
         if ($friendship->pending === Auth::user()->id) {
             return back()->withErrors([
                 'accept' => 'You sent the request'
             ]);
         }
 
+        // checks if you are part of the friendship
         foreach ($friendship->users as $user) {
             if ($user->id === Auth::id()) {
                 $canAdd = true;

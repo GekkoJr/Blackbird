@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // this controller can handle auth if needed
+    // this controller handles auth
     public function createUser(Request $request)
     {
         $validated = $request->validate([
@@ -25,6 +25,7 @@ class AuthController extends Controller
             ]);
         }
 
+        // creates a new user and saves it to the database
         $user = new User;
         $user->username = $validated['username'];
         $user->password = Hash::make($validated['password']);
@@ -43,6 +44,7 @@ class AuthController extends Controller
             ]);
     }
 
+    // validates a user
     public function login(Request $request)
     {
         $validated = $request->validate([

@@ -19,19 +19,22 @@ const addUserForm = useForm({
 let pending = []
 let userInfo = {}
 
-
+// gets pending user (will be converted to a function later)
 window.axios.get('/user/pending')
     .then(function (response) {
         pending = response.data
     })
 
+// gets current user
 window.axios.get('/user/info')
     .then(function (response) {
         userInfo = response.data
     })
 
+// creates a reactive value for the page the user is on
 let menuPage = ref(1)
 
+// sends a form when you accept a friend
 function confirmUser(id) {
     addUserForm.user = id
     addUserForm.post('/user/accept')

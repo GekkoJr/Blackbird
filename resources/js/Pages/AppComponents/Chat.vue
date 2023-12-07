@@ -2,10 +2,12 @@
 import {useForm} from '@inertiajs/vue3'
 import {onUpdated, onMounted, ref, onBeforeMount, onBeforeUpdate} from "vue"
 
+// gets current channel from inertia js
 const props = defineProps({
     channel: String,
 })
 
+// form to send a message
 const form = useForm({
     message: null,
     channel: null,
@@ -23,10 +25,12 @@ function getMessages() {
     if (ableToGet) {
         let link = `/message/get/${props.channel}/${skip}`
         ableToGet = false
+        // axios contacts the server asking for messages and reverses them, so they display correctly
         window.axios.get(link)
             .then(function (response) {
                 messages.value = response.data.reverse().concat(messages.value)
                 skip = skip + 50
+                // allows it to send a new request
                 ableToGet = true
                 newMessagesDB = true
             })
@@ -34,6 +38,7 @@ function getMessages() {
 
 }
 
+// listens for the SendMessage event over websockets
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
         console.log(e)
@@ -41,6 +46,7 @@ window.Echo.private(`ws.${props.channel}`)
         messages.value.push(e)
     })
 
+// turns unix dates into readable dates
 function displayDate(unix) {
     let date = new Date(unix * 1000)
     return date
@@ -56,6 +62,7 @@ function scrollToBottom() {
     container.scrollTop = container.scrollHeight
 }
 
+// checks if user is at the top of the page and starts loading more messages
 function handleScroll(e) {
     if (e.target.scrollTop === 0) {
         getMessages()
@@ -64,16 +71,19 @@ function handleScroll(e) {
 
 form.channel = props.channel
 
+// scrolls to bottom after messages have loaded
 onMounted(() => {
     const chatBox = document.getElementById('chatBox');
     console.log('Chat mounted succesfully')
     scrollToBottom()
 })
 
+// gets messages after the page has been given to the user but before it has finished initializing
 onBeforeMount(() => {
     getMessages()
 })
 
+// if there is new messages from db make sure we keep our current position in the window
 onUpdated(() => {
     if (newMessagesDB && !firstScroll) {
         // moves the user to where they were
@@ -88,6 +98,7 @@ onUpdated(() => {
 
 })
 
+// saves current pos before we load more messages
 onBeforeUpdate(() => {
     if (newMessagesDB) {
         lastScrollHeight = chatBox.scrollHeight

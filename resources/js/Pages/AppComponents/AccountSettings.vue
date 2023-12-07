@@ -24,7 +24,6 @@ const passwordForm = useForm({
             <div v-if="passwordForm.errors.password" class="error">
                 <p>TEST</p>
             </div>
-
             <button type="submit">Change</button>
         </form>
     </div>

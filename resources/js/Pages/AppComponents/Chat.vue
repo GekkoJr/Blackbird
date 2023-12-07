@@ -44,6 +44,8 @@ window.Echo.private(`ws.${props.channel}`)
         console.log(e)
         skip++;
         messages.value.push(e)
+        // makes sure we scroll after the message loads
+        firstScroll = true
     })
 
 // turns unix dates into readable dates

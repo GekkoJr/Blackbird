@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div>
+    <div style="padding: 10px">
         <p>WIP</p>
     </div>
 </template>

@@ -6,4 +6,8 @@ to test this out.
 2. When you are in a chat you will see a text box on the bottom, this is where you will write your message
 3. To send it click the send icon on the right side of the box or click enter
 
+<br>
+
+![Image visualizing the steps](/help-img/send-message.png)
+
 [Go back to overview](/help/index)

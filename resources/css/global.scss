@@ -18,6 +18,15 @@ body {
     }
 }
 
+.help {
+    img {
+        width: 500px;
+        height: auto;
+        border-radius: 6px;
+        border: 2px solid $surface1;
+    }
+}
+
 
 .material-symbols-outlined {
     font-variation-settings: 'FILL' 0,
@@ -41,3 +50,5 @@ body {
         color: $red;
     }
 }
+
+/* fixes funky scrollbars on chrome */

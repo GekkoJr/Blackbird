@@ -68,8 +68,8 @@ function confirmUser(id) {
                     <button type="submit" class="material-symbols-outlined">add</button>
                 </label>
 
-                <p class="error" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
-                <p class="error" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
+                <p class="error" style="margin-top: 15px" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
+                <p class="success" style="margin-top: 15px" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
             </form>
         </div>
         <div v-show="menuPage === 3">

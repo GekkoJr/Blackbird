@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
     <AppLayout>
         <!-- As this renders markdown as html it is important to never let a user create a help article -->
-        <div v-html="marked(body)"></div>
+        <div class="help" v-html="marked(body)"></div>
     </AppLayout>
 </template>
 

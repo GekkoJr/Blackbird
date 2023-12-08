@@ -94,3 +94,8 @@ Route::get("/help/{file}", function ($file) {
          "body" => file_get_contents($path)
      ]);
 });
+
+Route::get("/help-img/{file}", function ($file) {
+    $path = resource_path() . "/help/img/" . $file;
+    return response()->file($path);
+});

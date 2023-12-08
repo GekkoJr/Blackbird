@@ -51,4 +51,12 @@ body {
     }
 }
 
-/* fixes funky scrollbars on chrome */
+/* fix for chrome */
+::-webkit-scrollbar, ::-webkit-scrollbar-corner {
+    background-color: $base;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $surface0;
+}
+

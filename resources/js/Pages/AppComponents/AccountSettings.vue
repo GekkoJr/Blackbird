@@ -6,6 +6,10 @@ const passwordForm = useForm({
     verify_password: null,
 })
 
+const emailForm = useForm({
+    email: null,
+})
+
 </script>
 
 <template>
@@ -21,11 +25,26 @@ const passwordForm = useForm({
                 <span>repeat password</span>
                 <input required type="password" v-model='passwordForm.verify_password'>
             </label>
-            <div v-if="passwordForm.errors.password" class="error">
-                <p>TEST</p>
+            <div style="margin-bottom: 5px" v-if="passwordForm.errors.error" class="error">
+                <p>{{ passwordForm.errors.error }}</p>
             </div>
-            <button type="submit">Change</button>
+            <button type="submit">Change Password</button>
         </form>
+        <p>Change email</p>
+        <form @submit.prevent="emailForm.post('/user/update/email')">
+            <label>
+                <span>New email</span>
+                <input type="email" required v-model="emailForm.email">
+            </label>
+            <div class="error" style="margin-bottom: 5px" v-if="emailForm.errors.email">
+                <p>{{ emailForm.errors.email }}</p>
+            </div>
+            <div style="margin-bottom: 5px" v-if="emailForm.errors.success">
+                <p>{{ emailForm.errors.success }}</p>
+            </div>
+            <button type="submit">Change email</button>
+        </form>
+
     </div>
 </template>
 

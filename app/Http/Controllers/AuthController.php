@@ -19,7 +19,7 @@ class AuthController extends Controller
             'verify_password' => 'required',
         ]);
 
-        if($validated['verify_password'] !== $validated['password']) {
+        if ($validated['verify_password'] !== $validated['password']) {
             return back()->withErrors([
                 'error' => 'The passwords do not match',
             ]);
@@ -32,7 +32,7 @@ class AuthController extends Controller
         $user->email = $validated['email'];
         $user->save();
 
-        if(Auth::attempt([
+        if (Auth::attempt([
             'email' => $user->email,
             'password' => $validated['password']
         ])) {
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'error' => 'something went wrong'
-            ]);
+        ]);
     }
 
     // validates a user
@@ -61,21 +61,24 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout() {
+    public function logout()
+    {
         Auth::logout();
         session()->regenerate();
         return to_route("login");
     }
 
-    public function updatePassword(Request $request) {
+    public function updatePassword(Request $request)
+    {
         $request->validate([
             'password' => 'required',
-            'password_verify' => 'required'
+            'verify_password' => 'required'
         ]);
-
         // checks if the passwords match
-        if($request->password == $request->password_verify) {
-            User::find(Auth::id())->password = Hash::make($request->password);
+        if ($request->password == $request->verify_password) {
+            $user = Auth::user();
+            $user->password = Hash::make($request->password);
+            $user->save();
             session()->regenerate();
             // yes it is bad, but in my defense it is really late
             return back()->withErrors([
@@ -85,6 +88,21 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'error' => 'Passwords do not match'
+        ]);
+    }
+
+    public function updateEmail(Request $request) {
+        $request->validate([
+            'email' => 'required|email|unique:users'
+        ]);
+
+        $user = Auth::user();
+        $user->email = $request->email;
+        $user->save();
+        session()->regenerate();
+
+        return back()->withErrors([
+            'success' => 'Email Updated'
         ]);
     }
 }

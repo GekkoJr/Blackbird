@@ -51,12 +51,11 @@ Route::get('/app/channel/{channel}', function (int $channel) {
 
 // Routes related to Auth
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/createUser', 'createUser')
-        ->name('createUser');
-    Route::post('/loginUser', 'login')
-        ->name('loginUser');
+    Route::post('/createUser', 'createUser')->name('createUser');
+    Route::post('/loginUser', 'login')->name('loginUser');
     Route::get('/user/logout', 'logout');
     Route::post('/user/update/password', 'updatePassword');
+    Route::post("/user/update/email", "updateEmail");
 });
 
 // Routes for chatting

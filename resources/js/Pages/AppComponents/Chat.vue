@@ -35,7 +35,6 @@ function getMessages() {
                 newMessagesDB = true
             })
     }
-
 }
 
 // listens for the SendMessage event over websockets

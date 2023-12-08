@@ -19,19 +19,22 @@ const addUserForm = useForm({
 let pending = []
 let userInfo = {}
 
-
+// gets pending user (will be converted to a function later)
 window.axios.get('/user/pending')
     .then(function (response) {
         pending = response.data
     })
 
+// gets current user
 window.axios.get('/user/info')
     .then(function (response) {
         userInfo = response.data
     })
 
+// creates a reactive value for the page the user is on
 let menuPage = ref(1)
 
+// sends a form when you accept a friend
 function confirmUser(id) {
     addUserForm.user = id
     addUserForm.post('/user/accept')
@@ -64,8 +67,9 @@ function confirmUser(id) {
                     <input type="text" v-model="searchForm.username" placeholder="Add user">
                     <button type="submit" class="material-symbols-outlined">add</button>
                 </label>
-                <p class="error" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
-                <p class="error" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
+
+                <p class="error" style="margin-top: 15px" v-if="searchForm.errors.error">{{ searchForm.errors.error }}</p>
+                <p class="success" style="margin-top: 15px" v-if="searchForm.errors.success">{{ searchForm.errors.success }}</p>
             </form>
         </div>
         <div v-show="menuPage === 3">
@@ -108,16 +112,15 @@ function confirmUser(id) {
 }
 
 .menu {
-    display: flex;
+    width: 600px;
     justify-content: center;
     margin-bottom: 15px;
 
     button {
         background-color: $surface0;
         color: $text;
-        width: fit-content;
         border-radius: 6px;
-        padding: 5px 10px;
+        padding: 5px 30px;
         margin: 0 5px;
         border: 1px solid $surface0;
 
@@ -129,10 +132,9 @@ function confirmUser(id) {
 }
 
 .addUser {
-    display: flex;
-    align-items: center;
 
     label {
+        vertical-align: middle;
 
         input {
             background-color: $surface0;
@@ -140,13 +142,16 @@ function confirmUser(id) {
             border: none;
             padding: 5px 10px;
             border-radius: 6px;
+            vertical-align: middle;
         }
 
         button {
             background-color: $surface0;
             color: $text;
             border: none;
-            vertical-align: center;
+            vertical-align: middle;
+            border-radius: 6px;
+            margin-left: 5px;
 
             &:hover {
                 color: $flamingo;

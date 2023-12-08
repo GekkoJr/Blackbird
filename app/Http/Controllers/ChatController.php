@@ -16,6 +16,7 @@ class ChatController extends Controller
             'message' => 'required'
         ]);
 
+        // get the current username
         $from = Auth::user()->username;
         $createdAt = time();
 
@@ -26,6 +27,7 @@ class ChatController extends Controller
         $message->channel = $request->channel;
         $message->save();
 
+        // triggers the SendMessage Event
         SendMessage::dispatch($request->message, $from, $createdAt, $request->channel, $message->id);
 
 

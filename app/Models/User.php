@@ -50,7 +50,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Friendship::class);
     }
 
-    // these should maybe be in a controller, but they are related to getting date, so it's ok ish
+    // these should maybe be in a controller, but they are related to getting date, so it's ok
+    // this loops through a users friends and returns an array with them
     public function getOtherUsersFromFriends()
     {
         $users = [];
@@ -64,10 +65,10 @@ class User extends Authenticatable
             }
 
         }
-
         return $users;
     }
 
+    // returns an array og pending friendships connected to the user
     public function getPendingFriendshipsUsers()
     {
         $friendships = [];
@@ -86,10 +87,10 @@ class User extends Authenticatable
                 array_push($friendships, $users);
             }
         }
-
         return $friendships;
     }
 
+    // get a list of all accepted friends and the channels the chat is in
     public function getFriendshipsAndChannels()
     {
         $friendshipsAndChannels = [];

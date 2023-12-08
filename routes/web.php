@@ -39,7 +39,7 @@ Route::get('/app/global', function () {
         'channel' => 'global',
         'friends' => app(\App\Http\Controllers\FriendshipController::class)->allFriends(),
     ]);
-});
+})->middleware("auth");
 
 Route::get('/app/channel/{channel}', function (int $channel) {
     return Inertia::render('App', [
@@ -51,11 +51,11 @@ Route::get('/app/channel/{channel}', function (int $channel) {
 
 // Routes related to Auth
 Route::controller(AuthController::class)->group(function () {
-    Route::post('/createUser', 'createUser')
-        ->name('createUser');
-
-    Route::post('/loginUser', 'login')
-        ->name('loginUser');
+    Route::post('/createUser', 'createUser')->name('createUser');
+    Route::post('/loginUser', 'login')->name('loginUser');
+    Route::get('/user/logout', 'logout');
+    Route::post('/user/update/password', 'updatePassword');
+    Route::post("/user/update/email", "updateEmail");
 });
 
 // Routes for chatting
@@ -74,8 +74,27 @@ Route::controller('App\Http\Controllers\FriendshipController')->group(function (
     Route::get('/user/pending', 'getPending');
     Route::post('/user/add', 'addFriend');
     Route::post('/user/accept', 'acceptFriend');
-});
+})->middleware("auth");
 
 Route::get('/user/info', function () {
     return \Illuminate\Support\Facades\Auth::user()->toJson();
+});
+
+//routes for User settings
+Route::controller(\App\Http\Controllers\SettingsController::class)->group(function () {
+    Route::get("/user/settings", "index");
+})->middleware("auth");
+
+// I know placing logic in routes is a big no no, but in this case I do it anyway
+Route::get("/help/{file}", function ($file) {
+     $path = resource_path() . '/help/article/'. $file . '.md';
+     if(!file_exists($path)) {abort(404);}
+     return Inertia::render("Help", [
+         "body" => file_get_contents($path)
+     ]);
+});
+
+Route::get("/help-img/{file}", function ($file) {
+    $path = resource_path() . "/help/img/" . $file;
+    return response()->file($path);
 });

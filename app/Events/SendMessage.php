@@ -30,7 +30,7 @@ class SendMessage implements ShouldBroadcast
 
     public function __construct($message, $from, $time, $channel, $id)
     {
-        //
+        // sets tge data to be transmitted
         $this->message = $message;
         $this->created_at_unix = $time;
         $this->fromUser = $from;

@@ -8,8 +8,9 @@ body {
     margin: 0;
 }
 
-.link {
+.link, a{
     color: $blue;
+    text-decoration: none;
 
     &:hover {
         color: $maroon;
@@ -17,13 +18,21 @@ body {
     }
 }
 
+.help {
+    img {
+        width: 500px;
+        height: auto;
+        border-radius: 6px;
+        border: 2px solid $surface1;
+    }
+}
+
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    font-variation-settings: 'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
 
 .error {
@@ -34,9 +43,20 @@ body {
     width: 100%;
     margin-top: -8px;
     margin-bottom: 15px;
+    color: $red;
 
     span.material-symbols-outlined {
         font-size: 20px;
         color: $red;
     }
 }
+
+/* fix for chrome */
+::-webkit-scrollbar, ::-webkit-scrollbar-corner {
+    background-color: $base;
+}
+
+::-webkit-scrollbar-thumb {
+    background: $surface0;
+}
+

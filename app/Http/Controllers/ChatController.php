@@ -16,20 +16,23 @@ class ChatController extends Controller
             'message' => 'required'
         ]);
 
-        // get the current username
-        $from = Auth::user()->username;
+        // get the current id
+        $from = Auth::id();
         $createdAt = time();
 
         $message = new Message;
-        $message->fromUser = $from;
+        $message->user_id = $from;
         $message->message = $request->message;
         $message->created_at_unix = $createdAt;
         $message->channel = $request->channel;
         $message->save();
 
         // triggers the SendMessage Event
-        SendMessage::dispatch($request->message, $from, $createdAt, $request->channel, $message->id);
+        SendMessage::dispatch($request->message, [Auth::user()->username], $createdAt, $request->channel, $message->id);
+    }
 
-
+    public function getMessages(string $channel, int $skip)
+    {
+        return \App\Models\Message::with('user:id,username')->latest()->where('channel', $channel)->skip($skip)->take(50)->get()->toJson();
     }
 }

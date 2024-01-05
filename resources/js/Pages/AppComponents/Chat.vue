@@ -40,6 +40,8 @@ function getMessages() {
 // listens for the SendMessage event over websockets
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
+        // turns the user array into an object
+        e.user = {username: e.user[0]}
         console.log(e)
         skip++;
         messages.value.push(e)
@@ -113,7 +115,7 @@ onBeforeUpdate(() => {
         <div class="reciveMessage" id="chatBox" v-on:scroll="handleScroll">
             <div v-for="message of messages" :key="message.id">
                 <div class="nameAndTime">
-                    <p v-text="message.fromUser"></p>
+                    <p v-text="message.user.username"></p>
                     <p v-text="displayDate(message.created_at_unix)"></p>
                 </div>
                 <p class="message" v-text="message.message"></p>

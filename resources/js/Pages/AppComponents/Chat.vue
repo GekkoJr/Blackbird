@@ -41,7 +41,7 @@ function getMessages() {
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
         // turns the user array into an object
-        e.user = {username: e.user[0]}
+        e.user = {"username": e.user[0]}
         console.log(e)
         skip++;
         messages.value.push(e)
@@ -79,6 +79,7 @@ onMounted(() => {
     const chatBox = document.getElementById('chatBox');
     console.log('Chat mounted succesfully')
     scrollToBottom()
+    document.getElementById("message").focus()
 })
 
 // gets messages after the page has been given to the user but before it has finished initializing
@@ -124,7 +125,7 @@ onBeforeUpdate(() => {
 
         <div class="sendMessage">
             <form @submit.prevent="sendMessage">
-                <input type="text" v-model="form.message">
+                <input id="message" type="text" v-model="form.message">
                 <button><span class="material-symbols-outlined">send</span></button>
             </form>
         </div>

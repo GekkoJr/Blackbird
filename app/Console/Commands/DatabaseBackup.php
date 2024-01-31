@@ -32,13 +32,13 @@ class DatabaseBackup extends Command
             Storage::makeDirectory('DB_backup');
         }
 
-        $filename = "db-backup-" . Carbon::now()->format("Y-m-d-H") . ".gz";
+        $filename = "db-backup-" . Carbon::now()->format("Y-m-d-H:i:s") . ".gz";
 
         $command = "mariadb-dump --user=" . env('DB_USERNAME') . " --password='" . env('DB_PASSWORD') . "' --host="
             . env('DB_HOST') . " " . env('DB_DATABASE') . "  | gzip > " . storage_path() . "/app/DB_backup/" . $filename;
 
         echo $command;
-
         exec($command);
+        echo "backup complete";
     }
 }

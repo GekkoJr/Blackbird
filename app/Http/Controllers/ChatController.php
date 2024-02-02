@@ -35,4 +35,14 @@ class ChatController extends Controller
     {
         return \App\Models\Message::with('user:id,username')->latest()->where('channel', $channel)->skip($skip)->take(50)->get()->toJson();
     }
+
+    public function userImg($name)
+    {
+        $filename = storage_path() . "/app/userIcon/" . $name . ".jpg";
+        if (file_exists($filename)) {
+            return response()->file($filename);
+        }
+
+        return response()->file(resource_path() . "/img/defaultIcon.jpg");
+    }
 }

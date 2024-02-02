@@ -13,7 +13,7 @@ const props = defineProps({
         <div class="filler30px"></div>
         <Link as="button" href="/app"><span class="material-symbols-outlined">diversity_3</span><p>Friends</p></Link>
         <Link as="button" href="/app/global"><span class="material-symbols-outlined">public</span><p>Global Chat</p></Link>
-        <Link as="button" v-for="friend in friends" :key="friend[0]" :href="'/app/channel/' + friend[0]"><p>{{ friend[1] }}</p></Link>
+        <Link as="button" v-for="friend in friends" :key="friend[0]" :href="'/app/channel/' + friend[0]"><img class="img" src="/user/img/{{friend[1]}}" alt="profile pic"><p>{{ friend[1] }}</p></Link>
     </div>
 
 </template>
@@ -54,5 +54,12 @@ const props = defineProps({
 
 .filler30px {
     height: 30px;
+}
+
+.img {
+    height: 27px;
+    border-radius: 100%;
+    padding: 5px;
+    object-fit: contain;
 }
 </style>

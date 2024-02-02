@@ -62,6 +62,7 @@ Route::controller(AuthController::class)->group(function () {
 Route::controller(\App\Http\Controllers\ChatController::class)->group(function () {
     Route::post('/message/send', 'sendMessage');
     Route::get('/message/get/{channel}/{skip}', 'getMessages');
+    Route::get('/user/img/{name}', 'userImg');
 });
 
 // routes for friendships / groups

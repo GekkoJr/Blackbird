@@ -53,7 +53,7 @@ function confirmUser(id) {
             <div v-if="friends.length !== 0" v-for="friend in friends" class="usersDisplay">
                 <div>
                     <p v-text="friend[1]"></p>
-                    <Link :href="'/app/channel/' + friend[0]" as="button" class="material-symbols-outlined">message
+                    <Link :href="'/app/channel/' + friend[0]" as="button" class="material-symbols-outlined chk-btn">message
                     </Link>
                 </div>
             </div>
@@ -78,7 +78,7 @@ function confirmUser(id) {
                     <p v-if="friend[0] !== userInfo.username" v-text="friend[0]"></p>
                     <p v-else v-text="friend[1]"></p>
                     <p v-if="parseInt(friend[2]) === userInfo.id">waiting for answer</p>
-                    <button @click="confirmUser(parseInt(friend[3]))" v-else class="material-symbols-outlined">check
+                    <button @click="confirmUser(parseInt(friend[3]))" v-else class="material-symbols-outlined chk-btn">check
                     </button>
                 </div>
             </div>
@@ -157,6 +157,13 @@ function confirmUser(id) {
                 color: $flamingo;
             }
         }
+    }
+}
+
+.chk-btn {
+    &:hover {
+        background-color: $surface1;
+        color: $maroon;
     }
 }
 </style>

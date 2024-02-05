@@ -1,7 +1,15 @@
 <script setup>
+import { useForm } from "@inertiajs/vue3";
+
 const props = defineProps({
     user: null,
 })
+
+const form = useForm({
+    avatar: null,
+})
+
+console.log(props.user)
 
 
 </script>
@@ -10,10 +18,13 @@ const props = defineProps({
     <div style="padding: 10px">
         <div>
             <h3>Your current Profile image</h3>
-            <img class="icon" src="/user/img/{{user.username}}" alt="Your user profile pic">
-            <form class="img">
-                <input  required type="file">
+            <img class="icon" :src="'/user/img/' + user.id" alt="Your user profile pic">
+            <form class="img" @submit.prevent="form.post('/user/update-img')">
+                <input required type="file" @input="form.avatar = $event.target.files[0]">
                 <button type="submit">Upload new icon</button>
+                <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                    {{ form.progress.percentage }}%
+                </progress>
             </form>
         </div>
     </div>
@@ -24,6 +35,7 @@ const props = defineProps({
     border-radius: 100%;
     width: 300px;
     height: 300px;
+    object-fit: cover;
 }
 
 
@@ -65,6 +77,6 @@ form {
     width: 300px;
     display: grid;
     grid-template-rows: repeat(2, auto);
-    gap:10px;
+    gap: 10px;
 }
 </style>

@@ -33,6 +33,7 @@ function getMessages() {
                 // allows it to send a new request
                 ableToGet = true
                 newMessagesDB = true
+                console.log(messages.value)
             })
     }
 }
@@ -41,7 +42,10 @@ function getMessages() {
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
         // turns the user array into an object
-        e.user = {"username": e.user[0]}
+        e.user = {
+            "username": e.user[0]
+           // "id": e.user[1],
+        }
         console.log(e)
         skip++;
         messages.value.push(e)

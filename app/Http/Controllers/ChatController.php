@@ -29,7 +29,7 @@ class ChatController extends Controller
         $message->save();
 
         // triggers the SendMessage Event
-        SendMessage::dispatch($request->message, [Auth::user()->username], $createdAt, $request->channel, $message->id);
+        SendMessage::dispatch($request->message, [Auth::user()->username, Auth::id()], $createdAt, $request->channel, $message->id);
     }
     public function getMessages(string $channel, int $skip)
     {

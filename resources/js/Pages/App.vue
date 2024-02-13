@@ -6,7 +6,7 @@ import Chat from "./AppComponents/Chat.vue";
 
 const props = defineProps({
     chatting: Boolean,
-    channel: String,
+    channel: null,
     friends: Array,
 })
 

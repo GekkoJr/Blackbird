@@ -5,6 +5,11 @@ import ProfileSettings from "./AppComponents/ProfileSettings.vue";
 import AppLayout from "../Shared/layouts/AppLayout.vue";
 
 let page = ref(1);
+
+const props = defineProps({
+    user: null,
+})
+
 </script>
 
 <template>
@@ -16,7 +21,7 @@ let page = ref(1);
                 <button class="normal" @click="page = 2">Account</button>
                 <button class="logout" onclick="location.href = '/user/logout'">Log out</button>
             </div>
-            <ProfileSettings v-if="page === 1"></ProfileSettings>
+            <ProfileSettings v-if="page === 1" :user="user"></ProfileSettings>
             <AccountSettings v-if="page === 2"></AccountSettings>
         </div>
     </AppLayout>

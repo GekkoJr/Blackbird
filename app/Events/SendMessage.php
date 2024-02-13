@@ -21,9 +21,10 @@ class SendMessage implements ShouldBroadcast
 
     public string $message;
 
-    public string $fromUser;
+    public array $user;
 
     public string $channel;
+
 
     // time
     public $created_at_unix;
@@ -33,7 +34,7 @@ class SendMessage implements ShouldBroadcast
         // sets tge data to be transmitted
         $this->message = $message;
         $this->created_at_unix = $time;
-        $this->fromUser = $from;
+        $this->user = $from;
         $this->channel = $channel;
         $this->id = $id;
     }

@@ -2,7 +2,7 @@
 import {useForm} from '@inertiajs/vue3'
 import {onUpdated, onMounted, ref, onBeforeMount, onBeforeUpdate} from "vue"
 
-// gets current channel from inertia js
+// gets current channel from inertia js (via parent)
 const props = defineProps({
     channel: String,
 })
@@ -33,6 +33,7 @@ function getMessages() {
                 // allows it to send a new request
                 ableToGet = true
                 newMessagesDB = true
+                console.log(messages.value)
             })
     }
 }
@@ -40,6 +41,13 @@ function getMessages() {
 // listens for the SendMessage event over websockets
 window.Echo.private(`ws.${props.channel}`)
     .listen('SendMessage', (e) => {
+        // turns the user array into an object
+        let newData = e.user
+        e.user = {
+            "username": newData[0],
+            "id": newData[1],
+        }
+
         console.log(e)
         skip++;
         messages.value.push(e)
@@ -77,6 +85,7 @@ onMounted(() => {
     const chatBox = document.getElementById('chatBox');
     console.log('Chat mounted succesfully')
     scrollToBottom()
+    document.getElementById("message").focus()
 })
 
 // gets messages after the page has been given to the user but before it has finished initializing
@@ -111,18 +120,24 @@ onBeforeUpdate(() => {
 <template>
     <div class="sendAndReciveContainer">
         <div class="reciveMessage" id="chatBox" v-on:scroll="handleScroll">
-            <div v-for="message of messages" :key="message.id">
-                <div class="nameAndTime">
-                    <p v-text="message.fromUser"></p>
-                    <p v-text="displayDate(message.created_at_unix)"></p>
+            <div v-for="message of messages" :key="message.id" class="message-container">
+                <div>
+                    <img class="profile-pic" :src="'/user/img/' + message.user.id" :alt="message.user.username + ' profile picture'">
                 </div>
-                <p class="message" v-text="message.message"></p>
+                <div>
+                    <div class="nameAndTime">
+                        <p v-text="message.user.username"></p>
+                        <p v-text="displayDate(message.created_at_unix)"></p>
+                    </div>
+                    <p class="message" v-text="message.message"></p>
+                </div>
+
             </div>
         </div>
 
         <div class="sendMessage">
             <form @submit.prevent="sendMessage">
-                <input type="text" v-model="form.message">
+                <input id="message" type="text" v-model="form.message">
                 <button><span class="material-symbols-outlined">send</span></button>
             </form>
         </div>
@@ -134,6 +149,20 @@ onBeforeUpdate(() => {
     height: calc(100dvh - 100px);
     display: grid;
     grid-auto-rows: auto 50px;
+}
+
+.profile-pic {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    object-fit: cover;
+    margin-top: 9px;
+}
+
+.message-container {
+    display: grid;
+    grid-template-columns: 40px auto;
+    gap: 10px;
 }
 
 .sendMessage form {

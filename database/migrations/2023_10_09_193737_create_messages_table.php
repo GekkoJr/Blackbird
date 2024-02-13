@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->string('message');
-            $table->string('fromUser');
+            $table->unsignedBigInteger('user_id');
             $table->string('channel');
             $table->string('created_at_unix');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 import {useForm} from '@inertiajs/vue3'
 import {onUpdated, onMounted, ref, onBeforeMount, onBeforeUpdate} from "vue"
 
-// gets current channel from inertia js
+// gets current channel from inertia js (via parent)
 const props = defineProps({
     channel: String,
 })

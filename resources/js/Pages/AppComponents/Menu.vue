@@ -14,6 +14,7 @@ console.log(props.friends)
         <div class="filler30px"></div>
         <Link as="button" href="/app"><span class="material-symbols-outlined">diversity_3</span><p>Friends</p></Link>
         <Link as="button" href="/app/global"><span class="material-symbols-outlined">public</span><p>Global Chat</p></Link>
+        <p class="chat-shit">Direct messages</p>
         <Link as="button" v-for="friend in friends" :key="friend[0]" :href="'/app/channel/' + friend[0]"><img class="img" src="/user/img/{{friend[0]}}" alt="profile pic"><p>{{ friend[1] }}</p></Link>
     </div>
 
@@ -55,6 +56,12 @@ console.log(props.friends)
 
 .filler30px {
     height: 30px;
+}
+
+.chat-shit {
+    font-size: 0.7em;
+    padding-left: 10px;
+    color: #a6adc8;
 }
 
 .img {

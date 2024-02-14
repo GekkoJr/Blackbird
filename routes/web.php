@@ -90,9 +90,9 @@ Route::get("/help/{file}", function ($file) {
      return Inertia::render("Help", [
          "body" => file_get_contents($path)
      ]);
-});
+})->where('file', '.*');
 
 Route::get("/help-img/{file}", function ($file) {
     $path = resource_path() . "/help/img/" . $file;
     return response()->file($path);
-});
+})->where('file', '.*');

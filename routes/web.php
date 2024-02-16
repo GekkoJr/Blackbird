@@ -96,3 +96,7 @@ Route::get("/help-img/{file}", function ($file) {
     $path = resource_path() . "/help/img/" . $file;
     return response()->file($path);
 })->where('file', '.*');
+
+Route::get("/help", function () {
+    return redirect("/help/index");
+});

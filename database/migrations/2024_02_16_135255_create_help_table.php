@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->boolean("isDirectory");
-            $table->unsignedBigInteger("parent");
+            $table->unsignedBigInteger("parent")->nullable()->index();
+            $table->timestamps();
             $table->foreign("parent")->references("id")->on("help");
         });
     }

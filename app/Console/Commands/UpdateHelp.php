@@ -65,7 +65,7 @@ class UpdateHelp extends Command
                         $this->line("Dir file found: " . $dirFileInfo["filename"]);
 
                         $el = new HelpIndex;
-                        $el->name = $file;
+                        $el->name = $dirFileInfo["filename"];
                         $el->isDirectory = false;
                         $el->parent = $element->id;
                         $el->save();

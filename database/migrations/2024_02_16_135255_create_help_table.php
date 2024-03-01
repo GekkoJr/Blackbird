@@ -17,7 +17,7 @@ return new class extends Migration
             $table->boolean("isDirectory");
             $table->unsignedBigInteger("parent")->nullable()->index();
             $table->timestamps();
-            $table->foreign("parent")->references("id")->on("help");
+            $table->foreign("parent")->references("id")->on("help")->onDelete('cascade');
         });
     }
 

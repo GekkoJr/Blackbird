@@ -101,5 +101,5 @@ Route::get("/help-img/{file}", function ($file) {
 })->where('file', '.*');
 
 Route::get("/help", function () {
-    return redirect("/help/index");
+    return redirect("/help/Welcome");
 });

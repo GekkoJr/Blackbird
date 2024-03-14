@@ -5,9 +5,9 @@ import {Link} from "@inertiajs/vue3"
 <template>
     <header>
         <nav>
-            <a class="headerLink" href="/app"><span class="headerFunColor">//</span>Blackbird</a>
+            <Link class="headerLink" href="/app"><span class="headerFunColor">//</span>Blackbird</Link>
             <div style="display: flex">
-                <Link href="/help/index" class="headerLink"><span class="material-symbols-outlined">help</span></Link>
+                <Link href="/help" class="headerLink"><span class="material-symbols-outlined">help</span></Link>
                 <Link href="/user/settings" class="headerLink"><span class="material-symbols-outlined">settings</span></Link>
             </div>
         </nav>

@@ -84,15 +84,22 @@ Route::controller(\App\Http\Controllers\SettingsController::class)->group(functi
 })->middleware("auth");
 
 // I know placing logic in routes is a big no no, but in this case I do it anyway
+// TODO: make a seperate help controler
 Route::get("/help/{file}", function ($file) {
      $path = resource_path() . '/help/article/'. $file . '.md';
      if(!file_exists($path)) {abort(404);}
      return Inertia::render("Help", [
-         "body" => file_get_contents($path)
+         "body" => file_get_contents($path),
+         "menu" => \App\Models\HelpIndex::all()->toJson(),
+         "path" => $file
      ]);
-});
+})->where('file', '.*');
 
 Route::get("/help-img/{file}", function ($file) {
     $path = resource_path() . "/help/img/" . $file;
     return response()->file($path);
+})->where('file', '.*');
+
+Route::get("/help", function () {
+    return redirect("/help/Welcome");
 });

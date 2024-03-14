@@ -5,7 +5,7 @@ A fast-ish chat app with a global chat and friends and in the future servers and
 - laravel
 - VueJs
 - laravel echo
-- soketi (websockets server)
+- laravel reverb (websockets  server)
 - Inertia JS
 
 For a guide on seting up the project visit the wiki

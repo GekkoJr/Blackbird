@@ -3,22 +3,26 @@ To send a message to someone you have to be friends. Not certain how? this guide
 
 1. Navigate to the friends menu: Click on "friends" in the navigation  bar to the left of the screen
 
-![image of friends menu](/help-img/friend1.png)
+![image of friends menu](/help-img/friends/toFriends.jpg)
 
 2. When you are in the friends menu, you will find a top bar with the options "All", "ADD" and "Pending", These do the following
     - All: Shows all you friends
     - Add: this shows a menu for adding friends
     - Pending: friend requests from other people, or ones you sent that have not been accepted yet
-3. Go to "Add" here you will see a text box where you can write the username of your friend
+
+![Image of friends menu](/help-img/friends/friendsMenu.jpg)
+
+3. Go to "Add" here you will see a text box where you can write the username of your friend'
+
+![Go to add](/help-img/friends/addFriend.jpg)
+
 4. Write their username and click the button next to the text box or click enter to send a request
 
-![Image of friends menu](/help-img/friend2.png)
+![add friend](/help-img/friends/addFriend1.jpg)
 
 5. If the request is successful you will see a friend request sent message
-6. Now you have to get your friend to go to the Pending tab of the friends menu and accept you. if you do not see the request try to refresh the website
+6. Now all that  is left is for your friend to accept your request
 
-![Image of step 6](/help-img/friend3.png)
 
-Once your friend has accepted you will see your chat in the navigation bar to the left under the friends tab
+Once your friend has accepted you will see your friend's name in the navigation menu to the left
 
-[Back to overview](/help/index)

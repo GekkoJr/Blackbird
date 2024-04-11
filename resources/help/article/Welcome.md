@@ -3,7 +3,7 @@ Here you will find useful guides on how to use our site. You can see a list of a
 
 New here? Consider checking out the [FAQ](/help/FAQ)
 
-Here are some quick guides to get you started chatting
+Here are some quick guides to get you started chattingco
 
 - [Sending a message](/help/message)
 - [Add a friend!](/help/add-friend)

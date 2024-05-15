@@ -10,5 +10,6 @@
 
 3. Why Blackbird?
 
-    Blackbird is a fast and easy to use chatting service, with focus on the users. 
+    Blackbird is a fast and easy to use chatting service, with focus on the users.
+
 

@@ -11,6 +11,14 @@ const form = useForm({
 
 console.log(props.user)
 
+function submitImage() {
+    form.post('/user/update-img', {
+        onSuccess: () => {
+            // temp fix, should make not garbage later
+            alert("please reload the page to see your new picture")
+        }
+    })
+}
 
 </script>
 
@@ -19,7 +27,7 @@ console.log(props.user)
         <div>
             <h3>Your current Profile image</h3>
             <img class="icon" :src="'/user/img/' + user.id" alt="Your user profile pic">
-            <form class="img" @submit.prevent="form.post('/user/update-img')">
+            <form class="img" @submit.prevent="submitImage">
                 <input required type="file" @input="form.avatar = $event.target.files[0]">
                 <button type="submit">Upload new icon</button>
                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
